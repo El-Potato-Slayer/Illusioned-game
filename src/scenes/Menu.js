@@ -1,15 +1,17 @@
-import { CST } from '../CST';
+import * as Phaser from 'phaser';
+import CST from '../CST';
 
 export default class MenuScene extends Phaser.Scene {
   constructor() {
     super({
       key: CST.scenes.menu,
     });
+    this.menuSong = null;
   }
 
-  init() {
+  // init() {
 
-  }
+  // }
 
   preload() {
     this.load.image('menu_bg', './assets/menu/menu_bg.jpg');
@@ -19,10 +21,17 @@ export default class MenuScene extends Phaser.Scene {
 
   create() {
     this.add.image(0, 0, 'menu_bg').setOrigin(0);
-    this.sound.play('menu_music', {
+    this.menuSong = this.sound.add('menu_music', {
       loop: true,
-      fadeIn: 4000,
+      volume: 0,
     });
+    this.menuSong.play();
+    const musicFadeIn = this.tweens.add({
+      targets: this.menuSong,
+      volume: 0.5,
+      duration: 3000,
+    });
+
 
     const playBtn = this.add.image(680, 350, 'play_btn');
     playBtn.setInteractive();
@@ -33,12 +42,18 @@ export default class MenuScene extends Phaser.Scene {
       playBtn.setTint(0xFFFFFF);
     });
     playBtn.on('pointerdown', () => {
-      // playBtn.setTint(0x000000)
-      this.scene.start(CST.scenes.firstLevel);
+      playBtn.setTint(0xA80D10);
+      musicFadeIn.stop();
+      this.tweens.add({
+        targets: this.menuSong,
+        volume: 0,
+        duration: 2000,
+      });
+      this.menuSong.stop();
+      this.cameras.main.fadeOut(2000, 0, 0, 0);
     });
-  }
-
-  update() {
-
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      this.scene.start(CST.scenes.intro);
+    });
   }
 }

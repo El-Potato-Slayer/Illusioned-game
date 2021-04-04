@@ -1,6 +1,8 @@
+import * as Phaser from 'phaser';
+import IntroScene from './scenes/IntroScene';
 import FirstLevel from './scenes/LevelOne';
 import MenuScene from './scenes/Menu';
-import Phaser from 'phaser'
+// const Phaser = require('phaser');
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -15,6 +17,7 @@ const game = new Phaser.Game({
   },
   scene: [
     MenuScene,
+    IntroScene,
     FirstLevel,
   ],
 });
