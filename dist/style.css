@@ -1,4 +1,13 @@
-*{
+*, 
+*::before,
+*::after{
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   overflow: hidden;
+}
+
+body{
+  height: 700px;
+  /* height: max-content; */
 }
