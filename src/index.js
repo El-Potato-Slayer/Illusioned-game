@@ -12,12 +12,12 @@ const game = new Phaser.Game({
     default: 'matter',
     matter: {
       // gravity: { y: 300 },
-      // debug: false,
+      // debug: true,
     },
   },
   scene: [
     // MenuScene,
-    // IntroScene,
+    IntroScene,
     FirstLevel,
   ],
 });

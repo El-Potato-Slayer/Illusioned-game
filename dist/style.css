@@ -11,3 +11,9 @@ body{
   height: 700px;
   /* height: max-content; */
 }
+
+.black-overlay{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0, 0.5);
+}
