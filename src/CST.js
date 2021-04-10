@@ -33,6 +33,36 @@ const CST = {
         width: 200
       },
       {
+        x: 3300,
+        y: 570,
+        width: 200,
+        scale: 0.6
+      },
+      {
+        x: 3700,
+        y: 740,
+        width: 100,
+        scale: 0.6
+      },
+      {
+        x: 3800,
+        y: 500,
+        width: 100,
+        scale: 0.6
+      },
+      {
+        x: 4200,
+        y: 500,
+        width: 100,
+        scale: 0.6
+      },
+      {
+        x: 4530,
+        y: 600,
+        width: 100,
+        scale: 0.6
+      },
+      {
         x: 3600,
         y: 940,
         width: 100

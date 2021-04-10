@@ -59,6 +59,13 @@ export default class FirstLevel extends Phaser.Scene {
     this.background = this.add.tileSprite(0,0,2500,1000, 'sky').setOrigin(0,0);
     this.background.setScrollFactor(0)
     this.background.scaleX = 3
+    // this.background.setDepth(0)
+
+    this.matter.add.rectangle(6640,1020, 600,200, {
+      label: 'level2Transition',
+      isSensor: true,
+      isStatic:true
+    })
 
     this.cityBackground1 = this.add.tileSprite(0,0, 1920, 1080, 'background1').setOrigin(0,0)
     this.cityBackground1.setScrollFactor(0)
@@ -84,14 +91,19 @@ export default class FirstLevel extends Phaser.Scene {
 
     if (this.level === 'firstLevel') {
       let bridge = this.matter.add.image(0, 0, 'environment', 'bridge.png', {shape: environmentShapes.bridge})
-      bridge.setPosition(4400, 880)
+      bridge.setPosition(5659, 872)
       bridge.setScale(0.65)
       bridge.setStatic(true)
+      let endText = this.add.text(6300, 450, 'The answer lies within your fear', {
+        fontFamily: 'New Tegomin',
+        fontSize: '40px'
+      })
     }
     
-    this.player = this.matter.add.sprite(2080, 700, 'player')//, 'run1', {shape: animationShapes.run1})
+    this.player = this.matter.add.sprite(6000, 700, 'player')//, 'run1', {shape: animationShapes.run1})
     this.player.setScale(0.15)
     this.player.setRectangle(35,100)
+    this.player.body.vertices[0].body.friction = 0.01
     // this.player.setFriction(0.1, 0.1)
 
     // this.player.setFixedRotation()
@@ -107,9 +119,9 @@ export default class FirstLevel extends Phaser.Scene {
     path.lineTo(2250, 855)
     this.createAnimation('crawler-walk', 'crawler', 'walk', 1, 13)
     // this.crawler = this.matter.add.sprite(2210, 700, 'crawler')
-    let crw = this.add.sprite(2210,700)
-    this.crawler = this.matter.add.sprite(crw)
-    this.crawler.body.label = "crawler"
+    // let crw = this.add.sprite(2210,700)
+    this.crawler = new Crawler(this.scene.scene, 2210,700)
+    // this.crawler = this.matter.add.sprite(crw)
     this.crawler.anims.play('crawler-walk')
     this.crawlerPath = this.add.follower(path, 0,0)
     this.crawlerPath.startFollow({
@@ -151,8 +163,10 @@ export default class FirstLevel extends Phaser.Scene {
         const { bodyA, bodyB } = pair;
         console.log(bodyA, bodyB);
 
+        console.log(this.player.body.isSensor);
         
-        if (bodyA.region && (bodyA.region.id === "0,156,21,22" || bodyB.label === "crawler")) {
+        if (bodyA.region && (bodyA.region.id === "0,156,21,22" || bodyB.label === "crawler") && !this.player.body.isSensor) {
+          console.log(this.player.body.isSensor);
           this.cameras.main.stopFollow()
           // this.player.y = 1200
           this.matter.world.remove(this.player)
@@ -170,21 +184,23 @@ export default class FirstLevel extends Phaser.Scene {
         if (bodyA.id !== 1 && bodyA.id !== 2 && bodyA.id !== 3 && bodyA.id !== 4) {
           this.isTouchingGround = true;
         } 
-        if (bodyA.id === 49) {
-          this.registry.destroy(); // destroy registry
-          this.events.off(); // disable all active events
-          this.textures.list = []
-          this.scene.restart('thirdLevel'); // restart current scene
-        }
-        if (bodyA.id === 2) {
-          // this.input.keyboard.enabled = false
-          // this.player.setVelocityX(0)
-          // this.player.anims.play('stand');
-          this.registry.destroy(); // destroy registry
-          this.events.off(); // disable all active events
-          this.textures.list = []
-          
+        // if (bodyA.id === 49) {
+        //   this.registry.destroy(); // destroy registry
+        //   this.events.off(); // disable all active events
+        //   this.textures.list = []
+        //   this.scene.restart('thirdLevel'); // restart current scene
+        // }
+        if (bodyA.label === 'level2Transition') {
+          this.player.setSensor(true)
+          setTimeout(() => {
+          this.cameras.main.fadeOut(1000,0,0,0)
+          this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.registry.destroy(); // destroy registry
+            this.events.off(); // disable all active events
+            this.textures.list = []
             this.scene.restart('secondLevel'); // restart current scene
+          });
+          }, 1000)
           
         }
       });
@@ -195,11 +211,9 @@ export default class FirstLevel extends Phaser.Scene {
     this.crawler.setPosition(this.crawlerPath.x, this.crawlerPath.y)
     if (this.crawler.x < 2255) {
       this.crawler.scaleX = -1
-      console.log('small');
     } 
     if (this.crawlerPath.x >= 2645) {
       this.crawler.scaleX = 1
-      console.log('sdds');
     }
     
     if (this.player.body.velocity.y > 0 && !this.isTouchingGround) {
@@ -268,7 +282,6 @@ export default class FirstLevel extends Phaser.Scene {
       key: key,
       frames: this.anims.generateFrameNames(atlasName, {
         prefix: prefix,
-        // suffix: ".png",
         start: start,
         end: end
       }),
