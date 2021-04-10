@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import CST from '../CST';
+import Crawler from '../models/crawler';
 
 export default class FirstLevel extends Phaser.Scene {
   constructor() {
@@ -16,10 +17,13 @@ export default class FirstLevel extends Phaser.Scene {
     this.cityBackground1 = null;
     this.cityBackground2 = null;
     this.cloud = null;
+    this.water = null;
+    this.crawler = null;
+    this.crawlerPath = null;
   }
 
   init(level) {
-    this.level = level
+    this.level = 'firstLevel'
     // console.log(this.level);
   }
 
@@ -32,19 +36,27 @@ export default class FirstLevel extends Phaser.Scene {
     this.load.image('ground', CST[this.level].ground);
     this.load.image('background1', CST[this.level].background1)
     this.load.image('background2', CST[this.level].background2)
+    this.load.image('crate', './assets/crate.png')
 
+    this.load.image('failed', './assets/texts/failed.png')    
+    this.load.image('restart', './assets/texts/restart.png')  
+    
     // this.load.atlas('sheet', './assets/bg-1/spritesheet.png', './assets/bg-1/spritesheet.json')
     this.load.atlas('environment', './assets/environment.png', './assets/environment.json')
     this.load.atlas('player', './assets/player3.png', './assets/player3.json')
+    this.load.atlas('crawler', './assets/enemies/crawler.png', './assets/enemies/crawler.json')
+    this.load.atlas('water', './assets/props/water/water.png', './assets/props/water/water.json')  
     // this.load.json('shapes', './assets/shapes.json')
     this.load.json('environmentshapes', './assets/environmentshapes.json')
     this.load.json('animationshapes', './assets/animations.json')
+
+    this.load.audio('failMusic', './assets/sounds/failed.mp3')
   }
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0)
 
-    this.background = this.add.tileSprite(0,0,1360,1000, 'sky').setOrigin(0,0);
+    this.background = this.add.tileSprite(0,0,2500,1000, 'sky').setOrigin(0,0);
     this.background.setScrollFactor(0)
     this.background.scaleX = 3
 
@@ -64,9 +76,24 @@ export default class FirstLevel extends Phaser.Scene {
     let environmentShapes = this.cache.json.get('environmentshapes')
     let animationShapes = this.cache.json.get('animationshapes')
     this.matter.world.setBounds(0,0, this.background.displayWidth, this.background.displayHeight + 20);
-    this.player = this.matter.add.sprite(100, 700, 'player')//, 'run1', {shape: animationShapes.run1})
+
+    let building = this.matter.add.image(0, 0, 'environment', `${this.level}Building.png`, {shape: environmentShapes[`${this.level}Building`]})
+    building.setPosition(CST[`${this.level}`].buildingCoordinates.x, CST[`${this.level}`].buildingCoordinates.y)
+    building.setScale(0.65)
+    building.setStatic(true)
+
+    if (this.level === 'firstLevel') {
+      let bridge = this.matter.add.image(0, 0, 'environment', 'bridge.png', {shape: environmentShapes.bridge})
+      bridge.setPosition(4400, 880)
+      bridge.setScale(0.65)
+      bridge.setStatic(true)
+    }
+    
+    this.player = this.matter.add.sprite(2080, 700, 'player')//, 'run1', {shape: animationShapes.run1})
     this.player.setScale(0.15)
     this.player.setRectangle(35,100)
+    // this.player.setFriction(0.1, 0.1)
+
     // this.player.setFixedRotation()
 
     this.createAnimation('run', 'player', 'run', 1, 15)
@@ -74,11 +101,35 @@ export default class FirstLevel extends Phaser.Scene {
     this.createAnimation('jump', 'player', 'jump', 1, 1)
     this.createAnimation('fall', 'player', 'land', 1, 1)
 
-    let building = this.matter.add.sprite(0, 0, 'environment', `${this.level}Building.png`, {shape: environmentShapes[`${this.level}Building`]})
-    building.setPosition(1600, this.background.displayHeight - 360)
-    building.setScale(0.65)
-    building.setStatic(true)
+    
+    let path = this.add.path(2250,855)
+    path.lineTo(2650, 855)
+    path.lineTo(2250, 855)
+    this.createAnimation('crawler-walk', 'crawler', 'walk', 1, 13)
+    // this.crawler = this.matter.add.sprite(2210, 700, 'crawler')
+    let crw = this.add.sprite(2210,700)
+    this.crawler = this.matter.add.sprite(crw)
+    this.crawler.body.label = "crawler"
+    this.crawler.anims.play('crawler-walk')
+    this.crawlerPath = this.add.follower(path, 0,0)
+    this.crawlerPath.startFollow({
+      positionOnPath: true,
+      duration: 5000,
+      repeat: -1,
+      rotateToPath: false,
+    })
 
+    // let crate = this.matter.add.image(0,0, 'crate')
+    // crate.setPosition(2200, 700)
+    // crate.setScale(0.15)
+
+    // this.water.body.collisionFilter = {
+    //   'group': 1,
+    //   'category': 2,
+    //   'mask': 0,
+    // };
+    this.createWater()
+    
     this.cameras.main.setBounds(0,0,this.background.displayWidth * 2, this.background.displayHeight)
     this.cameras.main.startFollow(this.player)
     this.createPlatforms('ground', this.background)
@@ -99,6 +150,23 @@ export default class FirstLevel extends Phaser.Scene {
       event.pairs.forEach(pair => {
         const { bodyA, bodyB } = pair;
         console.log(bodyA, bodyB);
+
+        
+        if (bodyA.region && (bodyA.region.id === "0,156,21,22" || bodyB.label === "crawler")) {
+          this.cameras.main.stopFollow()
+          // this.player.y = 1200
+          this.matter.world.remove(this.player)
+
+          const failMusic = this.sound.add('failMusic', {
+            volume: 0.5,
+          })
+
+          failMusic.play()
+          this.input.keyboard.enabled = false
+          this.restartText(failMusic)
+        }
+    
+        
         if (bodyA.id !== 1 && bodyA.id !== 2 && bodyA.id !== 3 && bodyA.id !== 4) {
           this.isTouchingGround = true;
         } 
@@ -118,56 +186,22 @@ export default class FirstLevel extends Phaser.Scene {
           
             this.scene.restart('secondLevel'); // restart current scene
           
-          
-          // restart.on('pointerover', () => {
-          //   restart.setFill(0xA80D10);
-          // });
-          // restart.on('pointerout', () => {
-          //   restart.setTint(0xFFFFFF);
-          // });
-          // restart.on('pointerdown', () => {
-          //   restart.setTint(0xA80D10);
-          //   // this.cameras.main.fadeOut(2000, 0, 0, 0);
-          // });
-          // this.tweens.add({
-          //   targets: [failure, restart],
-          //   alpha: {
-          //     value: 1, duration: 3000, ease: 'Power1'
-          //   }
-          // })
-          // this.scene.pause()
         }
       });
     });
-    // this.player.on('animationupdate-run', (anim, frame, gameObject )  => {
-    //   var sx = gameObject.x;
-    //   var sy = gameObject.y;
-    //   var sav = gameObject.body.angularVelocity;
-    //   var sv = gameObject.body.velocity;
-  
-    //   let nextFrameId = frame.nextFrame.textureFrame.slice(0, frame.nextFrame.textureFrame.indexOf('.')); // get next frame id
-    //   let nextShape = this.player[nextFrameId]; // get next shape
-  
-    //   /* These 2 methods must be run because:
-    //   1`) Before change body if we scaled before our sprite we must set the scale to the start value
-    //   */
-    //   gameObject.setScale(1);
-  
-  
-    //   gameObject.setBody(nextShape, { shape: animationShapes[nextFrameId] }); // set new  shape
-  
-    //   gameObject.setPosition(sx, sy);
-    //   gameObject.setVelocity(sv.x, sv.y);
-    //   gameObject.setAngularVelocity(sav);
-    //   gameObject.setScale(.2); //again scale
-    // })
   }
 
   update() {
-
-    // if (this.player.body.velocity.y > 0 && !this.isTouchingGround) {
-    //   this.player.anims.play('fall', true)
-    // }
+    this.crawler.setPosition(this.crawlerPath.x, this.crawlerPath.y)
+    if (this.crawler.x < 2255) {
+      this.crawler.scaleX = -1
+      console.log('small');
+    } 
+    if (this.crawlerPath.x >= 2645) {
+      this.crawler.scaleX = 1
+      console.log('sdds');
+    }
+    
     if (this.player.body.velocity.y > 0 && !this.isTouchingGround) {
       this.player.anims.play('fall', true)
     }
@@ -178,11 +212,11 @@ export default class FirstLevel extends Phaser.Scene {
       if (this.isTouchingGround) {
         this.player.anims.play('run', true);
       }
-      // this.cityBackground1.tilePositionX += 2
     }
     else if (this.cursors.right.isDown || this.wasd.right.isDown)
     {
       this.player.setVelocityX(5);
+
       this.player.scaleX = 0.15
       if (this.isTouchingGround) {
         this.player.anims.play('run', true);
@@ -243,17 +277,27 @@ export default class FirstLevel extends Phaser.Scene {
     });
   }
 
-  createPlatforms(shapes, background) {
-    for (let i = 1; i <= 4; i++) {
-      if (i !== 4) {
-        this.createGround(shapes, 680 * i, background.displayHeight - 60)
-      } else{
-        this.createGround(shapes, 680 * i, background.displayHeight - 60, 400)
-      }
-    }    
+  createPlatforms(shape) {
+    for (let i = 0; i < CST[`${this.level}`].platforms.length; i+=1) {
+      let platform = CST[`${this.level}`].platforms[i]
+      this.createGround(shape, platform.x, platform.y, platform.width, platform.scale)
+    }
+  }
 
-    this.createGround(shapes, 1000, background.displayHeight - 260, 600, 0.6)
-    this.createGround(shapes, 1150, background.displayHeight - 430, 400, 0.6)
+  createWater() {
+    for (let i = 0; i < CST.firstLevel.water.length; i+=1) {
+      let water = this.matter.add.sprite(CST.firstLevel.water[i].x, CST.firstLevel.water[i].y, 'water') 
+      water.setScale(0.5)
+      water.setStatic(true)
+      water.body.collisionFilter = {
+        'group': 1,
+        'category': 2,
+        'mask': 0,
+      };
+      this.createAnimation('waterMove', 'water', 'waterAnimation', 1, 63)
+      water.anims.play('waterMove', true)
+
+    }
   }
 
   createGround(shapes, x, y, width, scale) {
@@ -267,9 +311,43 @@ export default class FirstLevel extends Phaser.Scene {
       ground.displayWidth = width
     }
     ground.setStatic(true)
-    this.ground.push(ground)
-    // ground.setOnCollide(() => {
-    //   this.isTouchingGround = true
-    // })
+    return ground
+  }
+
+
+
+  restartText(music) {
+    const failed = this.add.image(this.cameras.main.scrollX + 680, this.cameras.main.scrollY +250, 'failed')           
+    failed.setScale(0.8)
+    failed.setAlpha(0)
+    const restart = this.add.image(this.cameras.main.scrollX + 680, this.cameras.main.scrollY + 380, 'restart')           
+    restart.setInteractive()
+    restart.setScale(0.8)
+    restart.setAlpha(0)
+    this.restartPointerEvents(restart, failed, music)
+  }
+
+  restartPointerEvents(restart, failed, failMusic){
+    restart.on('pointerover', () => {
+      restart.setTintFill(0xA80D10);
+    });
+    restart.on('pointerout', () => {
+      restart.setTint(0xFFFFFF);
+    });
+    restart.on('pointerdown', () => {
+      restart.setTint(0xA80D10);
+      failMusic.stop()
+      this.registry.destroy(); // destroy registry
+      this.events.off(); // disable all active events
+      this.input.keyboard.enabled = true
+      this.scene.restart(this.scene);
+      // this.cameras.main.fadeOut(2000, 0, 0, 0);
+    });
+    this.tweens.add({
+      targets: [failed, restart],
+      alpha: {
+        value: 1, duration: 3000, ease: 'Sine.easeInOut'
+      }
+    })
   }
 }

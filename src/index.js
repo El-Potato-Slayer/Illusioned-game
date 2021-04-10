@@ -11,13 +11,16 @@ const game = new Phaser.Game({
   physics: {
     default: 'matter',
     matter: {
-      // gravity: { y: 300 },
-      // debug: true,
+      // gravity: { y: 3 },
+      debug: true,
+      // matterBody: {
+      //   frictionAir: 1
+      // }
     },
   },
   scene: [
     // MenuScene,
-    IntroScene,
+    // IntroScene,
     FirstLevel,
   ],
 });
