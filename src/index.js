@@ -12,7 +12,7 @@ const game = new Phaser.Game({
     default: 'matter',
     matter: {
       // gravity: { y: 3 },
-      debug: true,
+      // debug: true,
       // matterBody: {
       //   frictionAir: 1
       // }
@@ -20,7 +20,7 @@ const game = new Phaser.Game({
   },
   scene: [
     // MenuScene,
-    // IntroScene,
+    IntroScene,
     FirstLevel,
   ],
 });

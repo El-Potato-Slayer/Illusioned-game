@@ -117,6 +117,80 @@ const CST = {
     background1: './assets/bg-2/layers/2.png',
     background2: './assets/bg-2/layers/3.png',
     background3: './assets/bg-2/layers/4.png',
+    buildingCoordinates: {x: 1800, y: 820},
+    platforms: [
+      {
+        x: 960,
+        y: 940,
+      },
+      {
+        x: 2880,
+        y: 940,
+      },
+      {
+        x: 5300,
+        y: 940,
+      },
+      {
+        x: 2700,
+        y: 400,
+        scale: 0.2,
+        rotation: 35,
+        friction: 0.0
+      },
+      {
+        x: 3200,
+        y: 400,
+        scale: 0.2,
+        rotation: -25,
+      },
+      {
+        x: 3700,
+        y: 424,
+        scale: 0.2,
+        rotation: -19,
+      },
+      {
+        x: 4300,
+        y: 424,
+        scale: 0.2,
+        width: 100
+      },
+      {
+        x: 4750,
+        y: 424,
+        scale: 0.2,
+        width: 50
+      },
+      {
+        x: 5100,
+        y: 450,
+        scale: 0.2,
+        width: 70,
+        rotation: 9
+      },
+      {
+        x: 5400,
+        y: 600,
+        scale: 0.2,
+        width: 40,
+      },
+      // {
+      //   x: 2040,
+      //   y: 940,
+      // },
+      // {
+      //   x: 3200,
+      //   y: 940,
+      //   width: 200
+      // },
+    ],
+    water: [
+      {
+        x: 4090,
+        y:900
+      }
+    ]
   },
   thirdLevel: {
     sky: './assets/bg-3/layers/1.png',
