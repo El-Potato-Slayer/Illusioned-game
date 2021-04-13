@@ -6,6 +6,7 @@ const CST = {
     secondLevel: 'secondLevel',
     thirdLevel: 'thirdLevel',
     fourthLevel: 'fourthLevel',
+    leaderBoard: 'leaderBoard'
   },
   firstLevel: {
     sky: './assets/bg-1/background.png',
@@ -199,6 +200,19 @@ const CST = {
     background1: './assets/bg-3/layers/2.png',
     background2: './assets/bg-3/layers/3.png',
     background3: './assets/bg-3/layers/4.png',
+    buildingCoordinates: {x: 1800, y: 820},
+    platforms: [
+      {
+        x: 960,
+        y: 940,
+      },
+      {
+        x: 2880,
+        y: 940,
+      }
+    ],
+    water: [
+    ]
   }
 };
 

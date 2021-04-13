@@ -1,5 +1,5 @@
 //id: MArCeCR5F1Ppp3vvnkUo
-
+//new ID: 7wAPFFVEriRN3ORR1W5D
 export default async function getWeather() {
   const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games`, {
     method: "post",
@@ -8,7 +8,7 @@ export default async function getWeather() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "name": "idk"
+      "name": "End-Of-The-WOrld"
     })
   });
 

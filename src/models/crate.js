@@ -11,8 +11,8 @@ export default class Crate extends Phaser.Physics.Matter.Image {
     this.startY = y
   }
 
-  moveVertically(start, end, time){
-    this.scene.tweens.addCounter({
+  moveVertically(start, end, time, stopHalfway){
+    const tween = this.scene.tweens.addCounter({
       from: start,
       to: end,
       duration: time,
@@ -23,9 +23,13 @@ export default class Crate extends Phaser.Physics.Matter.Image {
         const y = this.startY + target.value
         const dy = y - this.y
         this.y = y
+        if (stopHalfway && tween.elapsed > time) {
+          tween.pause()
+        }
         this.setVelocityY(dy)
       }
     })
+    
   }
 
   moveHorizontally(start, end, time)

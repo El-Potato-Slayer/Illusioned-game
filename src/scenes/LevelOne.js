@@ -24,11 +24,14 @@ export default class FirstLevel extends Phaser.Scene {
     this.crawlerPath = null;
     this.crate = null;
     this.cratePath = null;
+    this.timer = null;
+    this.seconds = 0;
+    this.minutes = 0;
   }
 
   init(level) {
-    this.level = 'secondLevel'
-    this.level = level
+    this.level = 'thirdLevel'
+    // this.level = level
     this.isTouchingGround = false
   }
 
@@ -45,12 +48,13 @@ export default class FirstLevel extends Phaser.Scene {
     this.load.image('failed', './assets/texts/failed.png')    
     this.load.image('restart', './assets/texts/restart.png')  
     
-    // this.load.atlas('sheet', './assets/bg-1/spritesheet.png', './assets/bg-1/spritesheet.json')
+    this.load.spritesheet('penguin', './assets/enemies/penguin.png', { frameWidth: 99, frameHeight: 155.6 })
+    
     this.load.atlas('environment', './assets/environment.png', './assets/environment.json')
     this.load.atlas('player', './assets/player3.png', './assets/player3.json')
     this.load.atlas('crawler', './assets/enemies/crawler.png', './assets/enemies/crawler.json')
     this.load.atlas('water', './assets/props/water/water.png', './assets/props/water/water.json')  
-    // this.load.json('shapes', './assets/shapes.json')
+
     this.load.json('environmentshapes', './assets/environmentshapes.json')
     this.load.json('animationshapes', './assets/animations.json')
 
@@ -59,19 +63,16 @@ export default class FirstLevel extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0)
+    // this.timer = this.time.addEvent()
+    // this.timerText = this.add.text(10, 10, "").setColor("#FFFFFF");
 
     this.background = this.add.tileSprite(0,0,2500,1000, 'sky').setOrigin(0,0);
     this.background.setScrollFactor(0)
     this.background.scaleX = 3
     // this.background.setDepth(0)
+    this.createTimer()
 
-    
-
-    this.cityBackground1 = this.add.tileSprite(0,0, 1920, 1080, 'background1').setOrigin(0,0)
-    this.cityBackground1.setScrollFactor(0)
-
-    this.cityBackground2 = this.add.tileSprite(0,0, 1920, 1080, 'background2').setOrigin(0,0)
-    this.cityBackground2.setScrollFactor(0)
+    this.createBackgrounds()
     
     if (this.level !== 'secondLevel') {
       this.cloud = this.add.tileSprite(0, -200, 1920, 2000, 'cloud').setOrigin(0,0)
@@ -168,6 +169,28 @@ export default class FirstLevel extends Phaser.Scene {
         isSensor: true,
         isStatic:true
       })
+    } else if (this.level === 'thirdLevel') {
+      let endingTransition = this.matter.add.rectangle(2400, 450, 100, 800, {
+        label: 'endingTransition',
+        isStatic: true,
+        isSensor: true
+      })
+      this.background.setSize(1900, 1000).scaleX = 1
+      this.player.setPosition(100, 110)
+      let penguin = this.matter.add.sprite(3500,700,'penguin')
+      penguin.setRectangle(50,130).setScale(-0.6, 0.6)
+      this.anims.create({
+        key: 'penguin-stand',
+        frames: this.anims.generateFrameNumbers('penguin', { start: 0, end: 29 }),
+        frameRate: 20,
+        repeat: -1
+    });
+    penguin.anims.play('penguin-stand', true)
+      const crate = new Crate(this, 100, 200, 'crate', {
+        isStatic: true
+      })
+      crate.moveVertically(0, 650, '5000', true)
+      
     }
     this.createWater()
 
@@ -227,12 +250,6 @@ export default class FirstLevel extends Phaser.Scene {
             this.isTouchingGround = true;
           }
         } 
-        // if (bodyA.id === 49) {
-        //   this.registry.destroy(); // destroy registry
-        //   this.events.off(); // disable all active events
-        //   this.textures.list = []
-        //   this.scene.restart('thirdLevel'); // restart current scene
-        // }
         if (bodyB.label === 'level2Transition' || bodyB.label === 'level3Transition') {
           this.player.setSensor(true)
           setTimeout(() => {
@@ -244,8 +261,23 @@ export default class FirstLevel extends Phaser.Scene {
             if (bodyB.label === 'level2Transition') {
               this.scene.restart('secondLevel'); // restart current scene
             }
+            else if (bodyB.label === 'level3Transition') {
+              this.scene.restart('thirdLevel'); // restart current scene
+            }
           });
           }, 1000)
+        }
+        if (bodyB.label === 'endingTransition') {
+          console.log(this.player.y);
+          this.player.setActive(false)
+          this.input.keyboard.enabled = false
+          this.player.setVelocityX(0)
+          this.player.body.velocity.x = 0
+          // setTimeout(() => {
+          // }, 3000)
+          this.cameras.main.stopFollow()
+          this.cameras.main.pan(3000, 835, 3000, 'Sine.easeInOut')
+          
         }
       });
     });
@@ -254,6 +286,17 @@ export default class FirstLevel extends Phaser.Scene {
 
 
   update() {
+    if (this.seconds < 10) {
+      this.timer.setText(`${this.minutes}:0${this.seconds}`);
+    } else {
+      this.timer.setText(`${this.minutes}:${this.seconds}`);
+    }
+    // this.timer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
+    
+    // let elapsedTime = this.timer.getElapsedSeconds()
+    // let minutes = Math.floor(elapsedTime / minutes * 60)
+    // let seconds = Math.floor(elapsedTime / minutes * 60)
+    // console.log(this.seconds);
     // this.crate.setPosition(this.cratePath.x, this.cratePath.y)
     // this.crawler.setPosition(this.crawlerPath.x, this.crawlerPath.y)
     // if (this.crawler.x < 2255) {
@@ -292,6 +335,33 @@ export default class FirstLevel extends Phaser.Scene {
     this.player.setFixedRotation()
 
     this.tileSpritePositionChanges()
+  }
+
+  createTimer() {
+    this.timer = this.add.text( 20,  20, '0:00', {
+      fontFamily: 'New Tegomin',
+      fontSize: '30px',
+      fill: '#ffffff' 
+    })
+    this.timer.setScrollFactor(0).setDepth(1)
+    if (this.seconds === 0 && this.minutes === 0) {
+      setInterval(() => {
+        this.seconds += 1
+        if (this.seconds === 60) {
+          this.seconds = 0
+          this.minutes += 1
+        }
+      } ,1000)
+      
+    }
+  }
+
+  createBackgrounds() {
+    this.cityBackground1 = this.add.tileSprite(0,0, 1920, 1080, 'background1').setOrigin(0,0)
+    this.cityBackground1.setScrollFactor(0)
+
+    this.cityBackground2 = this.add.tileSprite(0,0, 1920, 1080, 'background2').setOrigin(0,0)
+    this.cityBackground2.setScrollFactor(0)
   }
 
   tileSpritePositionChanges(){

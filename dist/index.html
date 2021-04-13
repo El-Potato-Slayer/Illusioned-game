@@ -8,12 +8,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">  -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet"> 
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script> -->
   <script src="main.js" type="module"></script>
   <title>Document</title>
 </head>
 <body>
-  
+  <div id="form-wrapper" class="hidden absolute flex justify-center flex-col items-center">
+    <input id="name" type="text" class=" px-2 py-1 rounded-md " placeholder="Enter name">    
+    <button id="submit" class="bg-white text-gray-800 px-2 py-1 block w-32 my-4">Submit</button>
+  </div>
 </body>
 </html>
