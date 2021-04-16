@@ -24,9 +24,8 @@ export default class FirstLevel extends Phaser.Scene {
     this.crawlerPath = null;
     this.crate = null;
     this.cratePath = null;
-    this.timer = null;
-    this.seconds = 0;
-    this.minutes = 0;
+    this.scoreCounter = null
+    this.score = 0;
   }
 
   init(level) {
@@ -63,7 +62,7 @@ export default class FirstLevel extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0)
-    // this.timer = this.time.addEvent()
+    // this.scoreCounter = this.time.addEvent()
     // this.timerText = this.add.text(10, 10, "").setColor("#FFFFFF");
 
     this.background = this.add.tileSprite(0,0,2500,1000, 'sky').setOrigin(0,0);
@@ -198,16 +197,6 @@ export default class FirstLevel extends Phaser.Scene {
     this.createAnimation('stand', 'player', 'stand', 1, 1)
     this.createAnimation('jump', 'player', 'jump', 1, 1)
     this.createAnimation('fall', 'player', 'land', 1, 1)
-
-    // this.crawler = this.matter.add.sprite(2210, 700, 'crawler')
-    // let crw = this.add.sprite(2210,700)
-    // this.crawler = this.matter.add.sprite(crw)
-
-    // this.water.body.collisionFilter = {
-    //   'group': 1,
-    //   'category': 2,
-    //   'mask': 0,
-    // };
     
     this.cameras.main.setBounds(0,0,this.background.displayWidth * 2, this.background.displayHeight)
     this.cameras.main.startFollow(this.player)
@@ -286,11 +275,8 @@ export default class FirstLevel extends Phaser.Scene {
 
 
   update() {
-    if (this.seconds < 10) {
-      this.timer.setText(`${this.minutes}:0${this.seconds}`);
-    } else {
-      this.timer.setText(`${this.minutes}:${this.seconds}`);
-    }
+    this.scoreCounter.setText(`${this.score}`);
+    
     // this.timer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
     
     // let elapsedTime = this.timer.getElapsedSeconds()
@@ -338,19 +324,15 @@ export default class FirstLevel extends Phaser.Scene {
   }
 
   createTimer() {
-    this.timer = this.add.text( 20,  20, '0:00', {
+    this.scoreCounter = this.add.text( 20,  20, '0:00', {
       fontFamily: 'New Tegomin',
       fontSize: '30px',
       fill: '#ffffff' 
     })
-    this.timer.setScrollFactor(0).setDepth(1)
-    if (this.seconds === 0 && this.minutes === 0) {
+    this.scoreCounter.setScrollFactor(0).setDepth(1)
+    if (this.score === 0) {
       setInterval(() => {
-        this.seconds += 1
-        if (this.seconds === 60) {
-          this.seconds = 0
-          this.minutes += 1
-        }
+        this.score += 1
       } ,1000)
       
     }

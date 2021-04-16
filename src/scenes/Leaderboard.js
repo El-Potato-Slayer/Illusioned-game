@@ -1,4 +1,5 @@
 import CST from '../CST';
+import postScore, { getScores } from '../score';
 
 export default class LeaderBoard extends Phaser.Scene {
   
@@ -6,49 +7,95 @@ export default class LeaderBoard extends Phaser.Scene {
     super({
       key: CST.scenes.leaderBoard,
     });
-    this.score = null;
+    this.scores = null;
   }
-  init(score) {
-    const form = document.getElementById('form-wrapper')
-    form.classList.remove('hidden')
-    this.score = score
+
+  init() {
   }
 
   preload(){
-    this.load.image('menu_bg', './assets/menu/menu_bg.jpg');
+    this.load.video('credits', './assets/videos/credits.mp4', 'loadeddata', false, true);
+    this.load.audio('music', './assets/menu/song.mp3')
   }
   
   create() {
-    this.add.image(0, 0, 'menu_bg').setOrigin(0);
-    const btn = document.getElementById('submit')
-    btn.onclick = () => {
-      const name = document.getElementById('name').value
-      const o = this.findHighestScore(['1:45', '2:24', '4:18', '6:21'], '2:21')
-      console.log(o);
-    }
+    this.cameras.main.setAlpha(0);
+    const vid = this.add.video(680, 350, 'credits');
+    vid.play(true);
+    vid.setPaused(false);
+    vid.scale = 0.65;
+    const audio = this.sound.add('music', {loop: true,volume:0.2})
+    audio.play()
+    this.add.text(220, 55, 'Leaderboard', {
+      fontFamily: 'New Tegomin',
+      fontSize: '40px',
+      fill: '#ffffff' 
+    })
+    const nameText = this.add.text(200, 150, '    Name\n\n', {
+      fontFamily: 'New Tegomin',
+      fontSize: '30px',
+      fill: '#ffffff' 
+    })
+    const scoreText = this.add.text(400, 150, 'Time\n\n', {
+      fontFamily: 'New Tegomin',
+      fontSize: '30px',
+      fill: '#ffffff' 
+    })
+    getScores().then(data => {
+      const temp = data.result
+      this.scores = this.sortScores(temp); 
+      const timedScores = this.convertScoreToTime(this.scores)     
+      for (let i = 0; i < this.scores.length; i++) {
+        nameText.text += `${i+1}.\t${this.scores[i].user}\n`   
+        scoreText.text += `${timedScores[i]}\n`      
+      }
+      this.cameras.main.setAlpha(1);
+      this.cameras.main.fadeIn(3000);
+    })
+    const btn = this.add.text(260, 580, 'Back to menu', {
+      fontFamily: 'New Tegomin',
+      fontSize: '30px',
+      fill: '#ffffff'
+    })
+    btn.setInteractive()
+    btn.on('pointerover', () => {
+      btn.setTint(0xA80D10);
+    });
+    btn.on('pointerout', () => {
+      btn.setTint(0xFFFFFF);
+    });
+    btn.on('pointerdown', () => {
+      btn.setTint(0xA80D10);
+      // musicFadeIn.stop();
+      this.tweens.add({
+        targets: audio,
+        volume: 0,
+        duration: 2000,
+      });
+      audio.stop();
+      this.cameras.main.fadeOut(2000, 0, 0, 0);
+      this.scene.start(CST.scenes.menu)
+    });
   }
 
-  findHighestScore(scores, newScore){
-    // [
-    //  '1:45',
-    //  '2:24',
-    //  '4:18',
-    //  '6:21',
-    //]
-    let insertScore = []
-    scores.forEach(score => {
-      const minutes = score.split(':')[0]
-      const seconds = score.split(':')[1]
-      const newScoreMinutes = newScore.split(':')[0]
-      const newScoreSeconds = newScore.split(':')[1]
-      if (minutes > newScoreMinutes) {
-        insertScore[0] = newScoreMinutes
-      }
-      if (seconds > newScoreSeconds) {
-        insertScore[1] = newScoreSeconds
+  sortScores(scores){
+    const arr = scores
+    return arr.sort((a, b) => {return a.score - b.score})
+  }
+
+  convertScoreToTime(scores){
+    const arr = []
+    scores.forEach(scorePair => {
+      const minutes = Math.floor(scorePair.score / 60)
+      const seconds = scorePair.score % 60
+      if (minutes < 10 && seconds < 10) {
+        arr.push(`0${minutes}:0${seconds}`)
+      } else if (minutes >= 10 && seconds < 10) {
+        arr.push(`${minutes}:0${seconds}`)
+      } else{
+        arr.push(`${minutes}:${seconds}`)
       }
     });
-    
-    return insertScore
+    return arr
   }
 }

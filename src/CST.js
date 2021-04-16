@@ -3,9 +3,7 @@ const CST = {
     menu: 'menu',
     intro: 'intro',
     firstLevel: 'firstLevel',
-    secondLevel: 'secondLevel',
-    thirdLevel: 'thirdLevel',
-    fourthLevel: 'fourthLevel',
+    nameInput: 'nameInput',
     leaderBoard: 'leaderBoard'
   },
   firstLevel: {

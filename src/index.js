@@ -1,8 +1,9 @@
 // import * as Phaser from 'phaser';
 import IntroScene from './scenes/IntroScene';
-import LeaderBoard from './scenes/Leaderboard';
+import LeaderBoard from './scenes/LeaderBoard';
 import FirstLevel from './scenes/LevelOne';
 import MenuScene from './scenes/Menu';
+import NameInput from './scenes/NameInput';
 // const Phaser = require('phaser');
 
 const game = new Phaser.Game({
@@ -22,7 +23,10 @@ const game = new Phaser.Game({
   scene: [
     // MenuScene,
     // IntroScene,
-    FirstLevel,
-    // LeaderBoard
+    // FirstLevel,
+    // NameInput,
+    LeaderBoard,
+    MenuScene,
+
   ],
 });
