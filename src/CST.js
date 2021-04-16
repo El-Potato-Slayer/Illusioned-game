@@ -3,6 +3,7 @@ const CST = {
     menu: 'menu',
     intro: 'intro',
     firstLevel: 'firstLevel',
+    incomplete: 'incomplete',
     nameInput: 'nameInput',
     leaderBoard: 'leaderBoard'
   },
@@ -13,6 +14,7 @@ const CST = {
     background1: './assets/bg-1/layers/3.png',
     background2: './assets/bg-1/layers/4.png',
     buildingCoordinates: {x: 1800, y: 760},
+    backgroundMusic: './assets/sounds/level1.mp3',
     platforms: [
       {
         x: 680,
@@ -117,6 +119,7 @@ const CST = {
     background2: './assets/bg-2/layers/3.png',
     background3: './assets/bg-2/layers/4.png',
     buildingCoordinates: {x: 1800, y: 820},
+    backgroundMusic: './assets/sounds/level2.mp3',
     platforms: [
       {
         x: 960,
@@ -199,6 +202,7 @@ const CST = {
     background2: './assets/bg-3/layers/3.png',
     background3: './assets/bg-3/layers/4.png',
     buildingCoordinates: {x: 1800, y: 820},
+    backgroundMusic: './assets/sounds/level3.mp3',
     platforms: [
       {
         x: 960,

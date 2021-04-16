@@ -26,11 +26,13 @@ export default class FirstLevel extends Phaser.Scene {
     this.cratePath = null;
     this.scoreCounter = null
     this.score = 0;
+    this.timedScore = null
+    this.backgroundMusic = null
   }
 
   init(level) {
-    this.level = 'thirdLevel'
-    // this.level = level
+    // this.level = 'thirdLevel'
+    this.level = level
     this.isTouchingGround = false
   }
 
@@ -58,17 +60,18 @@ export default class FirstLevel extends Phaser.Scene {
     this.load.json('animationshapes', './assets/animations.json')
 
     this.load.audio('failMusic', './assets/sounds/failed.mp3')
+    this.load.audio('bgMusic1', './assets/sounds/level1.mp3')
+    this.load.audio('bgMusic2', './assets/sounds/level2.mp3')
+    this.load.audio('bgMusic3', './assets/sounds/level3.mp3')
   }
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0)
-    // this.scoreCounter = this.time.addEvent()
-    // this.timerText = this.add.text(10, 10, "").setColor("#FFFFFF");
-
+    
+    
     this.background = this.add.tileSprite(0,0,2500,1000, 'sky').setOrigin(0,0);
     this.background.setScrollFactor(0)
     this.background.scaleX = 3
-    // this.background.setDepth(0)
     this.createTimer()
 
     this.createBackgrounds()
@@ -92,15 +95,17 @@ export default class FirstLevel extends Phaser.Scene {
     this.player = this.matter.add.sprite(0, 0, 'player')//, 'run1', {shape: animationShapes.run1})
     this.player.setScale(0.15)
     this.player.setRectangle(35,100)
-    // this.player.setPolygon(35,6)
     this.player.body.friction = 0.4
-    // this.player.body.frictionAir = 0.05
     this.player.setBounce(0)
     this.player.body.label = 'player'
     
     this.createAnimation('crawler-walk', 'crawler', 'walk', 1, 13)
 
     if (this.level === 'firstLevel') {
+      this.backgroundMusic = this.sound.add('bgMusic1', {
+        loop: true,
+        volume: 0.5
+      })
       this.player.setPosition(100, 850)
       let bridge = this.matter.add.image(0, 0, 'environment', 'bridge.png', {shape: environmentShapes.bridge})
       bridge.setPosition(5659, 872)
@@ -110,18 +115,6 @@ export default class FirstLevel extends Phaser.Scene {
         fontFamily: 'New Tegomin',
         fontSize: '40px'
       })
-      let path = this.add.path(2250,855)
-      path.lineTo(2650, 855)
-      path.lineTo(2250, 855)
-      // this.crawler = new Crawler(this.scene.scene, 2210,700, 'crawler')
-      // this.crawler.anims.play('crawler-walk')
-      this.crawlerPath = this.add.follower(path, 0,0)
-      // this.crawlerPath.startFollow({
-      //   positionOnPath: true,
-      //   duration: 5000,
-      //   repeat: -1,
-      //   rotateToPath: false,
-      // })
       this.matter.add.rectangle(6640,1020, 600,200, {
         label: 'level2Transition',
         isSensor: true,
@@ -133,6 +126,10 @@ export default class FirstLevel extends Phaser.Scene {
       crawler.anims.play('crawler-walk', true)
 
     } else if (this.level === 'secondLevel') {
+      this.backgroundMusic = this.sound.add('bgMusic2', {
+        loop: true,
+        volume: 0.5
+      })
       let path = this.add.path(1300,675)
       path.lineTo(300, 675)
       path.lineTo(1300, 675)
@@ -169,6 +166,10 @@ export default class FirstLevel extends Phaser.Scene {
         isStatic:true
       })
     } else if (this.level === 'thirdLevel') {
+      this.backgroundMusic = this.sound.add('bgMusic3', {
+        loop: true,
+        volume: 0.5
+      })
       let endingTransition = this.matter.add.rectangle(2400, 450, 100, 800, {
         label: 'endingTransition',
         isStatic: true,
@@ -191,6 +192,8 @@ export default class FirstLevel extends Phaser.Scene {
       crate.moveVertically(0, 650, '5000', true)
       
     }
+    this.backgroundMusic.play()
+
     this.createWater()
 
     this.createAnimation('run', 'player', 'run', 1, 15)
@@ -221,9 +224,8 @@ export default class FirstLevel extends Phaser.Scene {
         
         if (bodyA.region && (bodyA.region.id === "0,156,21,22" || bodyB.label === "crawler") && !this.player.body.isSensor) {
           this.cameras.main.stopFollow()
-          // this.player.y = 1200
           this.matter.world.remove(this.player)
-
+          this.backgroundMusic.stop()
           const failMusic = this.sound.add('failMusic', {
             volume: 0.5,
           })
@@ -244,29 +246,41 @@ export default class FirstLevel extends Phaser.Scene {
           setTimeout(() => {
           this.cameras.main.fadeOut(1000,0,0,0)
           this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-            this.registry.destroy(); // destroy registry
-            this.events.off(); // disable all active events
+            this.registry.destroy(); 
+            this.events.off(); 
             this.textures.list = []
             if (bodyB.label === 'level2Transition') {
-              this.scene.restart('secondLevel'); // restart current scene
+              this.scene.restart('secondLevel'); 
             }
             else if (bodyB.label === 'level3Transition') {
-              this.scene.restart('thirdLevel'); // restart current scene
+              this.scene.restart('thirdLevel');
             }
+            this.tweens.add({
+              targets: this.backgroundMusic,
+              volume: 0,
+              duration: 2000,
+            });
+            this.backgroundMusic.stop()
           });
           }, 1000)
         }
         if (bodyB.label === 'endingTransition') {
-          console.log(this.player.y);
-          this.player.setActive(false)
-          this.input.keyboard.enabled = false
-          this.player.setVelocityX(0)
-          this.player.body.velocity.x = 0
-          // setTimeout(() => {
-          // }, 3000)
           this.cameras.main.stopFollow()
-          this.cameras.main.pan(3000, 835, 3000, 'Sine.easeInOut')
+          this.cameras.main.pan(3000, 835, 2000, 'Sine.easeInOut')
+          setTimeout(() => {
+            this.cameras.main.fadeOut(10, 0, 0, 0);
+            this.backgroundMusic.stop()
+            this.registry.destroy(); // destroy registry
+            this.events.off(); // disable all active events
+            this.textures.list = []
+            const score = this.score
+            this.score = 0
+            this.scene.start(CST.scenes.incomplete, score)
+          }, 3000)
+          // this.cameras.main.setTintFill(0x000000)
           
+          // this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+          // });
         }
       });
     });
@@ -275,22 +289,7 @@ export default class FirstLevel extends Phaser.Scene {
 
 
   update() {
-    this.scoreCounter.setText(`${this.score}`);
-    
-    // this.timer.setPosition(this.cameras.main.scrollX, this.cameras.main.scrollY)
-    
-    // let elapsedTime = this.timer.getElapsedSeconds()
-    // let minutes = Math.floor(elapsedTime / minutes * 60)
-    // let seconds = Math.floor(elapsedTime / minutes * 60)
-    // console.log(this.seconds);
-    // this.crate.setPosition(this.cratePath.x, this.cratePath.y)
-    // this.crawler.setPosition(this.crawlerPath.x, this.crawlerPath.y)
-    // if (this.crawler.x < 2255) {
-    //   this.crawler.scaleX = -1
-    // } 
-    // if (this.crawlerPath.x >= 2645) {
-    //   this.crawler.scaleX = 1
-    // }
+    this.timedScore.setText(`${this.convertScoreToTime(this.score)}`);
     
     if (this.player.body.velocity.y > 0 && !this.isTouchingGround) {
       this.player.anims.play('fall', true)
@@ -323,13 +322,29 @@ export default class FirstLevel extends Phaser.Scene {
     this.tileSpritePositionChanges()
   }
 
+  convertScoreToTime(score){
+    let timedScore = ''
+    const minutes = Math.floor(score / 60)
+    const seconds = score % 60
+    if (minutes < 10 && seconds < 10) {
+      timedScore = `0${minutes}:0${seconds}`
+    } else if (minutes < 10 && seconds >= 10) {
+      timedScore = `0${minutes}:${seconds}`
+    } else if (minutes >= 10 && seconds < 10) {
+      timedScore = `${minutes}:0${seconds}`
+    } else {
+      timedScore = `${minutes}:${seconds}`
+    }
+    return timedScore
+  }
+
   createTimer() {
-    this.scoreCounter = this.add.text( 20,  20, '0:00', {
+    this.timedScore = this.add.text( 20,  20, '0:00', {
       fontFamily: 'New Tegomin',
       fontSize: '30px',
       fill: '#ffffff' 
     })
-    this.scoreCounter.setScrollFactor(0).setDepth(1)
+    this.timedScore.setScrollFactor(0).setDepth(1)
     if (this.score === 0) {
       setInterval(() => {
         this.score += 1
@@ -387,22 +402,6 @@ export default class FirstLevel extends Phaser.Scene {
     for (let i = 0; i < CST[`${this.level}`].platforms.length; i+=1) {
       let platform = CST[`${this.level}`].platforms[i]
       this.createGround(shape, platform.x, platform.y, platform.width, platform.scale, platform.rotation, platform.friction)
-      // if (this.level === 'secondLevel' && i === 3) {
-      //   ground.setStatic(false)
-      //   ground.body.setImmovable = true
-      //   ground.body.ignoreGravity = true
-      //   this.tweens.add({
-      //     targets: ground,
-      //     from: 0,
-      //     to: 360,
-      //     duration: 500,
-      //     repeat: -1,
-      //     onUpdate: (tween, target) => {
-      //       // ground.setPosition(3250,400)
-      //       ground.rotation += 0.01
-      //     }
-      //   })
-      // }
     }
   }
 
@@ -444,8 +443,6 @@ export default class FirstLevel extends Phaser.Scene {
 
     return ground
   }
-
-
 
   restartText(music) {
     const failed = this.add.image(this.cameras.main.scrollX + 680, this.cameras.main.scrollY +250, 'failed')           

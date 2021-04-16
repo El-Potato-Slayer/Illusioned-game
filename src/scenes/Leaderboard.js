@@ -19,6 +19,7 @@ export default class LeaderBoard extends Phaser.Scene {
   }
   
   create() {
+
     this.cameras.main.setAlpha(0);
     const vid = this.add.video(680, 350, 'credits');
     vid.play(true);
@@ -44,7 +45,9 @@ export default class LeaderBoard extends Phaser.Scene {
     getScores().then(data => {
       const temp = data.result
       this.scores = this.sortScores(temp); 
-      const timedScores = this.convertScoreToTime(this.scores)     
+      // console.log(temp.sort((a, b) => a.score - b.score));
+      const timedScores = this.convertScoreToTime(this.scores)
+
       for (let i = 0; i < this.scores.length; i++) {
         nameText.text += `${i+1}.\t${this.scores[i].user}\n`   
         scoreText.text += `${timedScores[i]}\n`      
@@ -79,8 +82,14 @@ export default class LeaderBoard extends Phaser.Scene {
   }
 
   sortScores(scores){
-    const arr = scores
-    return arr.sort((a, b) => {return a.score - b.score})
+    const arr = []
+    for (let i = 0; i < scores.length; i++) {
+      if (!isNaN(scores[i].score)) {
+        arr.push(scores[i])
+        console.log(scores[i]);
+      }
+    }
+    return arr.sort((a, b) => a.score - b.score)
   }
 
   convertScoreToTime(scores){
@@ -90,12 +99,15 @@ export default class LeaderBoard extends Phaser.Scene {
       const seconds = scorePair.score % 60
       if (minutes < 10 && seconds < 10) {
         arr.push(`0${minutes}:0${seconds}`)
+      } else if (minutes < 10 && seconds >= 10) {
+        arr.push(`0${minutes}:${seconds}`)
       } else if (minutes >= 10 && seconds < 10) {
         arr.push(`${minutes}:0${seconds}`)
-      } else{
+      } else {
         arr.push(`${minutes}:${seconds}`)
       }
     });
+
     return arr
   }
 }

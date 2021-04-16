@@ -8,10 +8,11 @@ export default class NameInput extends Phaser.Scene {
       key: CST.scenes.nameInput,
     });
     this.score = null;
+    this.form = null
   }
   init(score) {
-    const form = document.getElementById('form-wrapper')
-    form.classList.remove('hidden')
+    this.form = document.getElementById('form-wrapper')
+    this.form.classList.remove('hidden')
     this.score = score
   }
 
@@ -20,6 +21,7 @@ export default class NameInput extends Phaser.Scene {
   }
   
   create() {
+    this.cameras.main.fadeIn(1000)
     this.add.image(0, 0, 'menu_bg').setOrigin(0);
     const btn = document.getElementById('submit')
     let arr = []
@@ -30,8 +32,13 @@ export default class NameInput extends Phaser.Scene {
     // })
     btn.onclick = () => {
       const name = document.getElementById('name').value
-      postScore(name, this.score)
-
+      postScore(name, this.score).then(() => {
+        this.form.classList.add('hidden')
+        this.cameras.main.fadeOut(1000)
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+          this.scene.start(CST.scenes.leaderBoard)
+        });
+      })
     }
   }
 
