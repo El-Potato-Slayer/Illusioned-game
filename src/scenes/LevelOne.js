@@ -31,7 +31,7 @@ export default class FirstLevel extends Phaser.Scene {
   }
 
   init(level) {
-    // this.level = 'thirdLevel'
+    // this.level = 'firstLevel'
     this.level = level
     this.isTouchingGround = false
   }
