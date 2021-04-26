@@ -32,7 +32,7 @@ export default class IntroScene extends Phaser.Scene {
 
     this.input.keyboard.addCapture('SPACE');
 
-    setTimeout(() => this.startFirstLevel(), 58000)
+    setTimeout(() => this.startFirstLevel(), 58000);
   }
 
   startFirstLevel() {

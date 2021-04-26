@@ -1,6 +1,6 @@
-// import * as Phaser from 'phaser';
+import * as Phaser from 'phaser';
 import IntroScene from './scenes/IntroScene';
-import LeaderBoard from './scenes/LeaderBoard';
+import LeaderBoard from './scenes/Leaderboard';
 import FirstLevel from './scenes/LevelOne';
 import Incomplete from './scenes/Incomplete';
 import MenuScene from './scenes/Menu';
@@ -15,7 +15,7 @@ const game = new Phaser.Game({
     default: 'matter',
     matter: {
       // gravity: { y: 3 },
-      debug: true,
+      // debug: true,
       // matterBody: {
       //   frictionAir: 1
       // }
@@ -28,9 +28,7 @@ const game = new Phaser.Game({
     Incomplete,
     NameInput,
     LeaderBoard,
-    // MenuScene,
-
   ],
 });
 
-export default game
+export default game;

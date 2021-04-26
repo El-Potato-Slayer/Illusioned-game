@@ -5,7 +5,7 @@ const CST = {
     firstLevel: 'firstLevel',
     incomplete: 'incomplete',
     nameInput: 'nameInput',
-    leaderBoard: 'leaderBoard'
+    leaderBoard: 'leaderBoard',
   },
   firstLevel: {
     sky: './assets/bg-1/background.png',
@@ -13,7 +13,7 @@ const CST = {
     ground: './assets/bg-1/ground.png',
     background1: './assets/bg-1/layers/3.png',
     background2: './assets/bg-1/layers/4.png',
-    buildingCoordinates: {x: 1800, y: 760},
+    buildingCoordinates: { x: 1800, y: 760 },
     backgroundMusic: './assets/sounds/level1.mp3',
     platforms: [
       {
@@ -31,59 +31,59 @@ const CST = {
       {
         x: 3200,
         y: 940,
-        width: 200
+        width: 200,
       },
       {
         x: 3300,
         y: 570,
         width: 200,
-        scale: 0.6
+        scale: 0.6,
       },
       {
         x: 3700,
         y: 740,
         width: 100,
-        scale: 0.6
+        scale: 0.6,
       },
       {
         x: 3800,
         y: 500,
         width: 100,
-        scale: 0.6
+        scale: 0.6,
       },
       {
         x: 4200,
         y: 500,
         width: 100,
-        scale: 0.6
+        scale: 0.6,
       },
       {
         x: 4530,
         y: 600,
         width: 100,
-        scale: 0.6
+        scale: 0.6,
       },
       {
         x: 3600,
         y: 940,
-        width: 100
+        width: 100,
       },
       {
         x: 3800,
         y: 940,
-        width: 60
+        width: 60,
       },
       {
         x: 1000,
         y: 740,
         width: 600,
-        scale: 0.6 
+        scale: 0.6,
       },
       {
         x: 1150,
         y: 570,
         width: 400,
-        scale: 0.6 
+        scale: 0.6,
       },
     ],
     crates: [
@@ -92,25 +92,25 @@ const CST = {
     water: [
       {
         x: 2900,
-        y: 900
+        y: 900,
       },
       {
         x: 3400,
-        y: 900
+        y: 900,
       },
       {
         x: 3900,
-        y: 900
+        y: 900,
       },
       {
         x: 4370,
-        y: 900
+        y: 900,
       },
       {
         x: 4840,
-        y: 900
+        y: 900,
       },
-    ]
+    ],
   },
   secondLevel: {
     sky: './assets/bg-2/layers/1.png',
@@ -118,7 +118,7 @@ const CST = {
     background1: './assets/bg-2/layers/2.png',
     background2: './assets/bg-2/layers/3.png',
     background3: './assets/bg-2/layers/4.png',
-    buildingCoordinates: {x: 1800, y: 820},
+    buildingCoordinates: { x: 1800, y: 820 },
     backgroundMusic: './assets/sounds/level2.mp3',
     platforms: [
       {
@@ -138,7 +138,7 @@ const CST = {
         y: 400,
         scale: 0.2,
         rotation: 35,
-        friction: 0.0
+        friction: 0.0,
       },
       {
         x: 3200,
@@ -156,20 +156,20 @@ const CST = {
         x: 4300,
         y: 424,
         scale: 0.2,
-        width: 100
+        width: 100,
       },
       {
         x: 4750,
         y: 424,
         scale: 0.2,
-        width: 50
+        width: 50,
       },
       {
         x: 5100,
         y: 450,
         scale: 0.2,
         width: 70,
-        rotation: 9
+        rotation: 9,
       },
       {
         x: 5400,
@@ -190,9 +190,9 @@ const CST = {
     water: [
       {
         x: 4090,
-        y:900
-      }
-    ]
+        y: 900,
+      },
+    ],
   },
   thirdLevel: {
     sky: './assets/bg-3/layers/1.png',
@@ -201,7 +201,7 @@ const CST = {
     background1: './assets/bg-3/layers/2.png',
     background2: './assets/bg-3/layers/3.png',
     background3: './assets/bg-3/layers/4.png',
-    buildingCoordinates: {x: 1800, y: 820},
+    buildingCoordinates: { x: 1800, y: 820 },
     backgroundMusic: './assets/sounds/level3.mp3',
     platforms: [
       {
@@ -211,11 +211,11 @@ const CST = {
       {
         x: 2880,
         y: 940,
-      }
+      },
     ],
     water: [
-    ]
-  }
+    ],
+  },
 };
 
 export default CST;
