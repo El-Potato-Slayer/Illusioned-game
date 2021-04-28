@@ -9,8 +9,12 @@ import NameInput from './scenes/NameInput';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
-  width: 1360,
-  height: 760,
+  scale: {
+    parent: 'game',
+    mode: Phaser.Scale.FIT,
+    width: 1360,
+    height: 682,
+  },
   physics: {
     default: 'matter',
     matter: {
@@ -27,7 +31,7 @@ const game = new Phaser.Game({
     FirstLevel,
     Incomplete,
     NameInput,
-    LeaderBoard
+    LeaderBoard,
   ],
 });
 

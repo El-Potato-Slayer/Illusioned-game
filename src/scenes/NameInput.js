@@ -26,10 +26,9 @@ export default class NameInput extends Phaser.Scene {
     this.cameras.main.fadeIn(1000);
     this.add.image(0, 0, 'menu_bg').setOrigin(0);
     const btn = document.getElementById('submit');
-
     btn.onclick = () => {
       if (!this.enteredName) {
-        const name = document.getElementById('name').value;
+        const name = document.getElementById('name').value.substr(0, 10);
         postScore(name, this.score).then(() => {
           this.form.classList.add('hidden');
           this.cameras.main.fadeOut(1000);

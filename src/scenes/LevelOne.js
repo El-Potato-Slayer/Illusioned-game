@@ -3,7 +3,6 @@ import CST from '../CST';
 import Crate from '../models/crate';
 import Crawler from '../models/crawler';
 import HelperFunctions from '../functions';
-// import Crawler from '../models/crawler';
 
 export default class FirstLevel extends Phaser.Scene {
   constructor() {
@@ -32,7 +31,6 @@ export default class FirstLevel extends Phaser.Scene {
   }
 
   init(level) {
-    // this.level = 'firstLevel';
     this.level = level;
     this.isTouchingGround = false;
   }
@@ -88,9 +86,7 @@ export default class FirstLevel extends Phaser.Scene {
 
     this.matter.world.setBounds(0, 0, this.background.displayWidth,
       this.background.displayHeight + 20);
-    // let shapes = this.cache.json.get('shapes')
     const environmentShapes = this.cache.json.get('environmentshapes');
-    // const animationShapes = this.cache.json.get('animationshapes');
 
     const building = this.matter.add.image(0, 0, 'environment', `${this.level}Building.png`, { shape: environmentShapes[`${this.level}Building`] });
     building.setPosition(CST[`${this.level}`].buildingCoordinates.x, CST[`${this.level}`].buildingCoordinates.y);
@@ -111,7 +107,7 @@ export default class FirstLevel extends Phaser.Scene {
 
       this.createBridge(environmentShapes.bridge);
 
-      this.matter.add.rectangle(6640, 1020, 600, 200, {
+      this.matter.add.rectangle(6640, 1060, 600, 200, {
         label: 'level2Transition',
         isSensor: true,
         isStatic: true,
@@ -157,7 +153,7 @@ export default class FirstLevel extends Phaser.Scene {
       const crate = new Crate(this, 150, 200, 'crate', {
         isStatic: true,
       });
-      crate.moveVertically(0, 650, '5000', true);
+      crate.moveVertically(0, 690, '5000', true);
     }
     this.backgroundMusic.play();
 
@@ -178,7 +174,10 @@ export default class FirstLevel extends Phaser.Scene {
         if (bodyA.region && (bodyA.region.id === '0,156,21,22' || bodyB.label === 'crawler') && !this.player.body.isSensor) {
           this.cameras.main.stopFollow();
           this.matter.world.remove(this.player);
+          this.player.visible = false;
           this.backgroundMusic.stop();
+          this.input.keyboard.enabled = false;
+          this.player.setAngle(-90);
           const failMusic = this.sound.add('failMusic', {
             volume: 0.5,
           });
@@ -223,15 +222,11 @@ export default class FirstLevel extends Phaser.Scene {
           setTimeout(() => {
             this.cameras.main.fadeOut(10, 0, 0, 0);
             this.backgroundMusic.stop();
-            this.registry.destroy(); // destroy registry
-            this.events.off(); // disable all active events
+            this.registry.destroy();
+            this.events.off();
             this.textures.list = [];
             this.scene.start(CST.scenes.incomplete, this.score);
           }, 3000);
-          // this.cameras.main.setTintFill(0x000000)
-
-          // this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-          // });
         }
       });
     });
@@ -255,9 +250,7 @@ export default class FirstLevel extends Phaser.Scene {
       if (this.isTouchingGround) {
         this.player.anims.play('run', true);
       }
-      // this.cityBackground1.tilePositionX -= 2
     } else if (this.isTouchingGround) {
-      // this.player.setVelocityX(0);
       this.player.anims.play('stand');
     }
     this.player.setFixedRotation();
@@ -266,7 +259,7 @@ export default class FirstLevel extends Phaser.Scene {
   }
 
   createPlayer() {
-    this.player = this.matter.add.sprite(0, 0, 'player');// , 'run1', {shape: animationShapes.run1})
+    this.player = this.matter.add.sprite(0, 0, 'player');
     this.player.setScale(0.15);
     this.player.setRectangle(35, 100);
     this.player.body.friction = 0.4;
@@ -281,7 +274,7 @@ export default class FirstLevel extends Phaser.Scene {
 
   createBridge(shape) {
     const bridge = this.matter.add.image(0, 0, 'environment', 'bridge.png', { shape });
-    bridge.setPosition(5659, 872);
+    bridge.setPosition(5659, 952);
     bridge.setScale(0.65);
     bridge.setStatic(true);
     this.add.text(6300, 450, 'The answer lies within your fear', {
@@ -291,10 +284,10 @@ export default class FirstLevel extends Phaser.Scene {
   }
 
   createSecondLevelCrates() {
-    const crate1 = new Crate(this, 1300, 0, 'crate', {
+    const crate1 = new Crate(this, 1340, 0, 'crate', {
       isStatic: true,
     });
-    crate1.moveVertically(400, 675, 2000);
+    crate1.moveVertically(400, 715, 2000);
 
     const crate2 = new Crate(this, 2400, 0, 'crate', {
       isStatic: true,
@@ -374,13 +367,9 @@ export default class FirstLevel extends Phaser.Scene {
     this.cityBackground2.tilePositionX = this.cameras.main.scrollX * 0.4;
     this.cityBackground2.tilePositionY = this.cameras.main.scrollY * 0.4;
     if (this.level !== 'secondLevel') {
-      // this.cloud.body.setMaxVelocityX(2)
       this.cloud.tilePositionX += 0.5;
       this.cloud.tilePositionY = 1000 + this.cameras.main.scrollY * 0.3;
     }
-    // this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FOLLOW_UPDATE, () => {
-    //   this.cloud.tilePositionX = this.cameras.main.scrollX * 0.8
-    // });
   }
 
   jump() {
@@ -432,7 +421,6 @@ export default class FirstLevel extends Phaser.Scene {
     ground.setPosition(x, y);
     ground.setStatic(true);
 
-    // ground.body.render;
     if (scale) {
       ground.setScale(scale);
     }
@@ -470,11 +458,10 @@ export default class FirstLevel extends Phaser.Scene {
     restart.on('pointerdown', () => {
       restart.setTint(0xA80D10);
       failMusic.stop();
-      this.registry.destroy(); // destroy registry
-      this.events.off(); // disable all active events
+      this.registry.destroy();
+      this.events.off();
       this.input.keyboard.enabled = true;
       this.scene.restart(this.level);
-      // this.cameras.main.fadeOut(2000, 0, 0, 0);
     });
     this.tweens.add({
       targets: [failed, restart],
