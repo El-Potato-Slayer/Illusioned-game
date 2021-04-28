@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import CST from '../CST';
+import HelperFunctions from '../functions';
 import { getScores } from '../score';
 
 export default class LeaderBoard extends Phaser.Scene {
@@ -21,12 +22,19 @@ export default class LeaderBoard extends Phaser.Scene {
     vid.play(true);
     vid.setPaused(false);
     vid.scale = 0.65;
+    // console.log(vid.getPlaybackRate())
     const audio = this.sound.add('music', { loop: true, volume: 0.2 });
     audio.play();
     this.add.text(220, 55, 'Leaderboard', {
       fontFamily: 'New Tegomin',
       fontSize: '40px',
       fill: '#ffffff',
+    });
+    const rankText = this.add.text(150, 150, '\n\n', {
+      fontFamily: 'New Tegomin',
+      fontSize: '30px',
+      fill: '#ffffff',
+      align: 'right'
     });
     const nameText = this.add.text(200, 150, '    Name\n\n', {
       fontFamily: 'New Tegomin',
@@ -40,12 +48,12 @@ export default class LeaderBoard extends Phaser.Scene {
     });
     getScores().then(data => {
       const temp = data.result;
-      this.scores = this.sortScores(temp);
-      // console.log(temp.sort((a, b) => a.score - b.score));
-      const timedScores = this.convertScoreToTime(this.scores);
+      this.scores = HelperFunctions.sortScores(temp);
+      const timedScores = HelperFunctions.convertFetchedScoreToTime(this.scores);
 
       for (let i = 0; i < this.scores.length; i += 1) {
-        nameText.text += `${i + 1}.\t${this.scores[i].user}\n`;
+        rankText.text += `${i + 1}.\n`
+        nameText.text += `${this.scores[i].user}\n`;
         scoreText.text += `${timedScores[i]}\n`;
       }
       this.cameras.main.setAlpha(1);
@@ -73,36 +81,7 @@ export default class LeaderBoard extends Phaser.Scene {
       });
       audio.stop();
       this.cameras.main.fadeOut(2000, 0, 0, 0);
-      this.scene.start(CST.scenes.menu);
+      location.reload()
     });
-  }
-
-  sortScores(scores) {
-    const arr = [];
-    for (let i = 0; i < scores.length; i += 1) {
-      if (!Number.isNaN(scores[i].score)) {
-        arr.push(scores[i]);
-      }
-    }
-    return arr.sort((a, b) => a.score - b.score);
-  }
-
-  convertScoreToTime(scores) {
-    const arr = [];
-    scores.forEach(scorePair => {
-      const minutes = Math.floor(scorePair.score / 60);
-      const seconds = scorePair.score % 60;
-      if (minutes < 10 && seconds < 10) {
-        arr.push(`0${minutes}:0${seconds}`);
-      } else if (minutes < 10 && seconds >= 10) {
-        arr.push(`0${minutes}:${seconds}`);
-      } else if (minutes >= 10 && seconds < 10) {
-        arr.push(`${minutes}:0${seconds}`);
-      } else {
-        arr.push(`${minutes}:${seconds}`);
-      }
-    });
-
-    return arr;
   }
 }

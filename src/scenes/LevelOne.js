@@ -32,7 +32,7 @@ export default class FirstLevel extends Phaser.Scene {
   }
 
   init(level) {
-    // this.level = 'firstLevel'
+    // this.level = 'firstLevel';
     this.level = level;
     this.isTouchingGround = false;
   }
@@ -68,8 +68,11 @@ export default class FirstLevel extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
-
+    this.matter.add.rectangle(0,520, 15, 760, {
+      label: 'leftBoundary',
+      isStatic: true
+    })
+    
     this.background = this.add.tileSprite(0, 0, 2500, 1000, 'sky').setOrigin(0, 0);
     this.background.setScrollFactor(0);
     this.background.scaleX = 3;
@@ -83,6 +86,8 @@ export default class FirstLevel extends Phaser.Scene {
       this.cloud.setScale(0.8);
     }
 
+    this.matter.world.setBounds(0, 0, this.background.displayWidth,
+      this.background.displayHeight + 20);
     // let shapes = this.cache.json.get('shapes')
     const environmentShapes = this.cache.json.get('environmentshapes');
     // const animationShapes = this.cache.json.get('animationshapes');
@@ -92,12 +97,7 @@ export default class FirstLevel extends Phaser.Scene {
     building.setScale(0.65);
     building.setStatic(true);
 
-    this.player = this.matter.add.sprite(0, 0, 'player');// , 'run1', {shape: animationShapes.run1})
-    this.player.setScale(0.15);
-    this.player.setRectangle(35, 100);
-    this.player.body.friction = 0.4;
-    this.player.setBounce(0);
-    this.player.body.label = 'player';
+    this.createPlayer()
 
     this.createAnimation('crawler-walk', 'crawler', 'walk', 1, 13);
 
@@ -106,15 +106,11 @@ export default class FirstLevel extends Phaser.Scene {
         loop: true,
         volume: 0.5,
       });
+
       this.player.setPosition(100, 850);
-      const bridge = this.matter.add.image(0, 0, 'environment', 'bridge.png', { shape: environmentShapes.bridge });
-      bridge.setPosition(5659, 872);
-      bridge.setScale(0.65);
-      bridge.setStatic(true);
-      this.add.text(6300, 450, 'The answer lies within your fear', {
-        fontFamily: 'New Tegomin',
-        fontSize: '40px',
-      });
+
+      this.createBridge(environmentShapes.bridge)
+      
       this.matter.add.rectangle(6640, 1020, 600, 200, {
         label: 'level2Transition',
         isSensor: true,
@@ -124,40 +120,20 @@ export default class FirstLevel extends Phaser.Scene {
       const crawler = new Crawler(this, 1000, 855, 'crawler');
       crawler.moveHorizontally(1130, 1530, 5000);
       crawler.anims.play('crawler-walk', true);
+
     } else if (this.level === 'secondLevel') {
       this.backgroundMusic = this.sound.add('bgMusic2', {
         loop: true,
         volume: 0.5,
       });
-      const path = this.add.path(1300, 675);
-      path.lineTo(300, 675);
-      path.lineTo(1300, 675);
+
+      this.createSecondLevelCrates()
 
       this.player.setPosition(100, 50);
-      const crate1 = new Crate(this, 1300, 0, 'crate', {
-        isStatic: true,
-      });
-      crate1.moveVertically(400, 675, 2000);
-
-      const crate2 = new Crate(this, 2400, 0, 'crate', {
-        isStatic: true,
-      });
-      crate2.moveVertically(780, 400, 2000);
-
-      const crate3 = new Crate(this, 6000, 800, 'crate', {
-        isStatic: true,
-      });
-      crate3.moveVertically(0, -800, 6000);
-      crate3.moveHorizontally(0, 1000, 6000);
 
       this.matter.add.image(0, 0, 'crate').setPosition(200, 700).setScale(0.15).setMass(15);
 
-      const crawler1 = new Crawler(this, 1000, 700, 'crawler');
-      crawler1.moveHorizontally(1250, 2540, 7000);
-      crawler1.anims.play('crawler-walk', true);
-      const crawler2 = new Crawler(this, 2000, 900, 'crawler');
-      crawler2.moveHorizontally(2195, 3810, 6000);
-      crawler2.anims.play('crawler-walk', true);
+      this.createSecondLevelEnemies()
 
       this.matter.add.rectangle(7000, 100, 600, 200, {
         label: 'level3Transition',
@@ -175,17 +151,11 @@ export default class FirstLevel extends Phaser.Scene {
         isSensor: true,
       });
       this.background.setSize(1900, 1000).scaleX = 1;
-      this.player.setPosition(100, 110);
-      const penguin = this.matter.add.sprite(3500, 700, 'penguin');
-      penguin.setRectangle(50, 130).setScale(-0.6, 0.6);
-      this.anims.create({
-        key: 'penguin-stand',
-        frames: this.anims.generateFrameNumbers('penguin', { start: 0, end: 29 }),
-        frameRate: 20,
-        repeat: -1,
-      });
-      penguin.anims.play('penguin-stand', true);
-      const crate = new Crate(this, 100, 200, 'crate', {
+      this.player.setPosition(150, 110);
+      
+      this.createPenguin()
+      
+      const crate = new Crate(this, 150, 200, 'crate', {
         isStatic: true,
       });
       crate.moveVertically(0, 650, '5000', true);
@@ -194,35 +164,17 @@ export default class FirstLevel extends Phaser.Scene {
 
     this.createWater();
 
-    this.createAnimation('run', 'player', 'run', 1, 15);
-    this.createAnimation('stand', 'player', 'stand', 1, 1);
-    this.createAnimation('jump', 'player', 'jump', 1, 1);
-    this.createAnimation('fall', 'player', 'land', 1, 1);
-
     this.cameras.main.setBounds(0, 0, this.background.displayWidth * 2,
-      this.background.displayHeight);
+    this.background.displayHeight);
     this.cameras.main.startFollow(this.player);
+
     this.createPlatforms('ground', this.background);
 
-    this.cursors = this.input.keyboard.createCursorKeys();
-    this.wasd = this.input.keyboard.addKeys(
-      {
-        up: Phaser.Input.Keyboard.KeyCodes.W,
-        down: Phaser.Input.Keyboard.KeyCodes.S,
-        left: Phaser.Input.Keyboard.KeyCodes.A,
-        right: Phaser.Input.Keyboard.KeyCodes.D,
-      },
-    );
-
-    this.input.keyboard.on('keydown-W', () => this.jump());
-    this.input.keyboard.addCapture('W');
-    this.input.keyboard.on('keydown-UP', () => this.jump());
-    this.input.keyboard.addCapture('UP');
+    this.createKeyboardInputs()
 
     this.matter.world.on('collisionstart', (event) => {
       event.pairs.forEach(pair => {
         const { bodyA, bodyB } = pair;
-
 
         if (bodyA.region && (bodyA.region.id === '0,156,21,22' || bodyB.label === 'crawler') && !this.player.body.isSensor) {
           this.cameras.main.stopFollow();
@@ -238,11 +190,12 @@ export default class FirstLevel extends Phaser.Scene {
         }
 
 
-        if (bodyA.id !== 1 && bodyA.id !== 2 && bodyA.id !== 3 && bodyA.id !== 4) {
+        if (bodyA.label !== 'leftBoundary') {
           if (bodyA.label === 'player' || bodyB.label === 'player') {
             this.isTouchingGround = true;
           }
         }
+        
         if (bodyB.label === 'level2Transition' || bodyB.label === 'level3Transition') {
           this.player.setSensor(true);
           setTimeout(() => {
@@ -274,9 +227,7 @@ export default class FirstLevel extends Phaser.Scene {
             this.registry.destroy(); // destroy registry
             this.events.off(); // disable all active events
             this.textures.list = [];
-            const { score } = this;
-            this.score = 0;
-            this.scene.start(CST.scenes.incomplete, score);
+            this.scene.start(CST.scenes.incomplete, this.score);
           }, 3000);
           // this.cameras.main.setTintFill(0x000000)
 
@@ -286,7 +237,6 @@ export default class FirstLevel extends Phaser.Scene {
       });
     });
   }
-
 
   update() {
     this.timedScore.setText(`${HelperFunctions.convertScoreToTime(this.score)}`);
@@ -316,7 +266,87 @@ export default class FirstLevel extends Phaser.Scene {
     this.tileSpritePositionChanges();
   }
 
+  createPlayer(){
+    this.player = this.matter.add.sprite(0, 0, 'player');// , 'run1', {shape: animationShapes.run1})
+    this.player.setScale(0.15);
+    this.player.setRectangle(35, 100);
+    this.player.body.friction = 0.4;
+    this.player.setBounce(0);
+    this.player.body.label = 'player';
 
+    this.createAnimation('run', 'player', 'run', 1, 15);
+    this.createAnimation('stand', 'player', 'stand', 1, 1);
+    this.createAnimation('jump', 'player', 'jump', 1, 1);
+    this.createAnimation('fall', 'player', 'land', 1, 1);
+  }
+
+  createBridge(shape){
+    const bridge = this.matter.add.image(0, 0, 'environment', 'bridge.png', { shape: shape });
+      bridge.setPosition(5659, 872);
+      bridge.setScale(0.65);
+      bridge.setStatic(true);
+      this.add.text(6300, 450, 'The answer lies within your fear', {
+        fontFamily: 'New Tegomin',
+        fontSize: '40px',
+      });
+  }
+
+  createSecondLevelCrates(){
+    const crate1 = new Crate(this, 1300, 0, 'crate', {
+      isStatic: true,
+    });
+    crate1.moveVertically(400, 675, 2000);
+
+    const crate2 = new Crate(this, 2400, 0, 'crate', {
+      isStatic: true,
+    });
+    crate2.moveVertically(780, 400, 2000);
+
+    const crate3 = new Crate(this, 6000, 800, 'crate', {
+      isStatic: true,
+    });
+    crate3.moveVertically(0, -800, 6000);
+    crate3.moveHorizontally(0, 1000, 6000);
+  }
+
+  createSecondLevelEnemies(){
+    const crawler1 = new Crawler(this, 1000, 700, 'crawler');
+      crawler1.moveHorizontally(1250, 2540, 7000);
+      crawler1.anims.play('crawler-walk', true);
+      const crawler2 = new Crawler(this, 2000, 900, 'crawler');
+      crawler2.moveHorizontally(2195, 3810, 6000);
+      crawler2.anims.play('crawler-walk', true);
+  }
+  
+  createKeyboardInputs(){
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.wasd = this.input.keyboard.addKeys(
+      {
+        up: Phaser.Input.Keyboard.KeyCodes.W,
+        down: Phaser.Input.Keyboard.KeyCodes.S,
+        left: Phaser.Input.Keyboard.KeyCodes.A,
+        right: Phaser.Input.Keyboard.KeyCodes.D,
+      },
+    );
+
+    this.input.keyboard.on('keydown-W', () => this.jump());
+    this.input.keyboard.addCapture('W');
+    this.input.keyboard.on('keydown-UP', () => this.jump());
+    this.input.keyboard.addCapture('UP');
+  }
+  
+  createPenguin(){
+    const penguin = this.matter.add.sprite(3500, 700, 'penguin');
+      penguin.setRectangle(50, 130).setScale(-0.6, 0.6);
+      this.anims.create({
+        key: 'penguin-stand',
+        frames: this.anims.generateFrameNumbers('penguin', { start: 0, end: 29 }),
+        frameRate: 20,
+        repeat: -1,
+      });
+      penguin.anims.play('penguin-stand', true);
+  }
+  
   createTimer() {
     this.timedScore = this.add.text(20, 20, '0:00', {
       fontFamily: 'New Tegomin',

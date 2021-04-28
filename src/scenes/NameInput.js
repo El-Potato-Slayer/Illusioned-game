@@ -15,6 +15,7 @@ export default class NameInput extends Phaser.Scene {
     this.form = document.getElementById('form-wrapper');
     this.form.classList.remove('hidden');
     this.score = score;
+    this.enteredName = false
   }
 
   preload() {
@@ -27,14 +28,16 @@ export default class NameInput extends Phaser.Scene {
     const btn = document.getElementById('submit');
 
     btn.onclick = () => {
-      const name = document.getElementById('name').value;
-      postScore(name, this.score).then(() => {
-        this.form.classList.add('hidden');
-        this.cameras.main.fadeOut(1000);
-        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-          this.scene.start(CST.scenes.leaderBoard);
+      if (!this.enteredName) {
+        const name = document.getElementById('name').value;
+        postScore(name, this.score).then(() => {
+          this.form.classList.add('hidden');
+          this.cameras.main.fadeOut(1000);
+          this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+            this.scene.start(CST.scenes.leaderBoard);
+          });
         });
-      });
+      }
     };
   }
 }
