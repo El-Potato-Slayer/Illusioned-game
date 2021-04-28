@@ -48,10 +48,10 @@ export default class HelperFunctions {
   }
 
   static calculateSum(a, b) {
-    return a + b
+    return a + b;
   }
 
   static calculateDifference(a, b) {
-    return a - b
+    return a - b;
   }
 }

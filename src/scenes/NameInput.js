@@ -15,7 +15,7 @@ export default class NameInput extends Phaser.Scene {
     this.form = document.getElementById('form-wrapper');
     this.form.classList.remove('hidden');
     this.score = score;
-    this.enteredName = false
+    this.enteredName = false;
   }
 
   preload() {

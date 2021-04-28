@@ -9,7 +9,7 @@ export default class IntroScene extends Phaser.Scene {
     this.text = null;
     this.cursors = null;
     this.introMusic = null;
-    this.skipped = false
+    this.skipped = false;
   }
 
   preload() {
@@ -21,7 +21,7 @@ export default class IntroScene extends Phaser.Scene {
     this.cameras.main.fadeIn(1000);
     const vid = this.add.video(680, 350, 'intro');
     vid.play(true);
-    vid.scale = 0.7
+    vid.scale = 0.7;
 
     this.text = this.add.text(460, 20, 'Press spacebar to skip', { fontSize: '32px', fill: '#ffffff' });
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -40,6 +40,6 @@ export default class IntroScene extends Phaser.Scene {
         this.scene.start(CST.scenes.firstLevel, 'firstLevel');
       });
     }
-    this.skipped = true
+    this.skipped = true;
   }
 }

@@ -21,38 +21,38 @@ describe('Tests for score convertion', () => {
 
 describe('Tests for distance summation', () => {
   it('Checks if sum is 7', async () => {
-    const sum = HelperFunctions.calculateSum(5,2);
+    const sum = HelperFunctions.calculateSum(5, 2);
     expect(sum).toBe(7);
   });
   it('Ensures sum is not 2', async () => {
-    const sum = HelperFunctions.calculateSum(5,2);
+    const sum = HelperFunctions.calculateSum(5, 2);
     expect(sum).not.toBe(2);
   });
   it('Checks if sum is 1', async () => {
-    const sum = HelperFunctions.calculateSum(-2,3);
+    const sum = HelperFunctions.calculateSum(-2, 3);
     expect(sum).toBe(1);
   });
   it('Ensures difference is not -2', async () => {
-    const sum = HelperFunctions.calculateSum(-2,3);
+    const sum = HelperFunctions.calculateSum(-2, 3);
     expect(sum).not.toBe(-2);
   });
 });
 
 describe('Tests for distance difference', () => {
   it('Checks if difference is 3', async () => {
-    const diff = HelperFunctions.calculateDifference(5,2);
+    const diff = HelperFunctions.calculateDifference(5, 2);
     expect(diff).toBe(3);
   });
   it('Ensures difference is not 2', async () => {
-    const diff = HelperFunctions.calculateDifference(5,2);
+    const diff = HelperFunctions.calculateDifference(5, 2);
     expect(diff).not.toBe(2);
   });
   it('Checks if difference is -5', async () => {
-    const diff = HelperFunctions.calculateDifference(-2,3);
+    const diff = HelperFunctions.calculateDifference(-2, 3);
     expect(diff).toBe(-5);
   });
   it('Ensures difference is not -2', async () => {
-    const diff = HelperFunctions.calculateDifference(-2,3);
+    const diff = HelperFunctions.calculateDifference(-2, 3);
     expect(diff).not.toBe(-2);
   });
 });

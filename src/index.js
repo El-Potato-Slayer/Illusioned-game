@@ -27,7 +27,7 @@ const game = new Phaser.Game({
     FirstLevel,
     Incomplete,
     NameInput,
-    LeaderBoard,
+    LeaderBoard
   ],
 });
 

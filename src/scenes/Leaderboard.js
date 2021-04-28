@@ -34,7 +34,7 @@ export default class LeaderBoard extends Phaser.Scene {
       fontFamily: 'New Tegomin',
       fontSize: '30px',
       fill: '#ffffff',
-      align: 'right'
+      align: 'right',
     });
     const nameText = this.add.text(200, 150, '    Name\n\n', {
       fontFamily: 'New Tegomin',
@@ -52,7 +52,7 @@ export default class LeaderBoard extends Phaser.Scene {
       const timedScores = HelperFunctions.convertFetchedScoreToTime(this.scores);
 
       for (let i = 0; i < this.scores.length; i += 1) {
-        rankText.text += `${i + 1}.\n`
+        rankText.text += `${i + 1}.\n`;
         nameText.text += `${this.scores[i].user}\n`;
         scoreText.text += `${timedScores[i]}\n`;
       }
@@ -81,7 +81,7 @@ export default class LeaderBoard extends Phaser.Scene {
       });
       audio.stop();
       this.cameras.main.fadeOut(2000, 0, 0, 0);
-      location.reload()
+      window.location.reload();
     });
   }
 }
