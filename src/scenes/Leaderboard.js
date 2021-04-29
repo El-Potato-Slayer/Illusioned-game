@@ -22,7 +22,6 @@ export default class LeaderBoard extends Phaser.Scene {
     vid.play(true);
     vid.setPaused(false);
     vid.scale = 0.65;
-    // console.log(vid.getPlaybackRate())
     const audio = this.sound.add('music', { loop: true, volume: 0.2 });
     audio.play();
     this.add.text(220, 55, 'Leaderboard', {
@@ -73,7 +72,6 @@ export default class LeaderBoard extends Phaser.Scene {
     });
     btn.on('pointerdown', () => {
       btn.setTint(0xA80D10);
-      // musicFadeIn.stop();
       this.tweens.add({
         targets: audio,
         volume: 0,

@@ -1,5 +1,4 @@
 import { getScores } from '../score';
-// import 'regenerator-runtime/runtime'
 
 global.fetch = jest.fn(() => Promise.resolve({
   json: () => Promise.resolve([{ name: 'Emma', score: 360 }, { name: 'John', score: 200 }]),

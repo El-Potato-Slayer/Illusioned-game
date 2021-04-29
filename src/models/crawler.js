@@ -21,35 +21,14 @@ export default class Crawler extends Phaser.Physics.Matter.Sprite {
       repeat: -1,
       yoyo: true,
       onUpdate: (tween, target) => {
-        // if (x < start + 5) {
-        //   this.scaleX = -1
-        // } else if
-        // const x = this.startX + target.value
-        // const dx = x - this.x
-        // this.x = x
         const x = start + target.value;
         if (x < start + start + 1) {
           this.scaleX = -1;
         } else if (x >= start + end - 1) {
           this.scaleX = 1;
         }
-        // if (x > start + 0.5) {
-        // } else if(x < start -0.5) {
-        // }
         this.x = x;
-        // this.setFixedRotation()
-
-        // this.setVelocityX(dx)
       },
     });
-    // scene.anims.create({
-    //   key: 'crawler-walk',
-    //   frameRate: 40,
-    //   frames: scene.anims.generateFrameNames('crawler', {
-    //     prefix: 'walk',
-    //     start:1,
-    //     end:13
-    //   })
-    // })
   }
 }

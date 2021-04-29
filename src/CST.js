@@ -1,7 +1,4 @@
 const CST = {
-  config: {
-
-  },
   scenes: {
     menu: 'menu',
     intro: 'intro',
@@ -179,16 +176,7 @@ const CST = {
         y: 640,
         scale: 0.2,
         width: 40,
-      },
-      // {
-      //   x: 2040,
-      //   y: 940,
-      // },
-      // {
-      //   x: 3200,
-      //   y: 940,
-      //   width: 200
-      // },
+      }
     ],
     water: [
       {
