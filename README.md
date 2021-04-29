@@ -1,9 +1,14 @@
 # Illusioned
-A browser game built with Phaser 3. It is responsive across different computer monitors, and features alluringly haunting music, paired with beautiful designs.
+A browser game built with Phaser 3. The game consists of 3 levels with varying difficulties. It is responsive across different computer monitors, and features alluringly haunting music, paired with beautiful designs.
 
 ![image](https://user-images.githubusercontent.com/43865875/116489526-7d41f480-a895-11eb-95e1-37daa017d72d.png)
 
 [Live Demo](https://el-potato-slayer.github.io/js-game/dist/index.html)
+
+## Controls
+- To move left: Press the A key or the left arrow key
+- To move right: Press the D key or the right arrow key
+- To jump: Press the W key or the up arrow key
 
 ## Built with
 - HTML
