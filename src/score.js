@@ -18,7 +18,6 @@ export default async function postScore(name, points) {
 export async function getScores() {
   const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/MArCeCR5F1Ppp3vvnkUo/scores/');
 
-
   const scores = await response.json();
   return scores;
 }
