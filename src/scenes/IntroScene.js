@@ -23,7 +23,11 @@ export default class IntroScene extends Phaser.Scene {
     vid.play(true);
     vid.scale = 0.7;
 
-    this.text = this.add.text(460, 20, 'Press spacebar to skip', { fontSize: '32px', fill: '#ffffff' });
+    this.text = this.add.text(460, 20, 'Press spacebar to skip', { 
+      fontFamily: 'New Tegomin', 
+      fontSize: '32px', 
+      fill: '#ffffff' 
+    });
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.input.keyboard.on('keydown-SPACE', () => this.startFirstLevel());
