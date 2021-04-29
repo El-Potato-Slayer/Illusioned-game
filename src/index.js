@@ -12,7 +12,7 @@ const game = new Phaser.Game({
     parent: 'game',
     mode: Phaser.Scale.FIT,
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
   },
   physics: {
     default: 'matter',

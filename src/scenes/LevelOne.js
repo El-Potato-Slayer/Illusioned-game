@@ -38,17 +38,18 @@ export default class FirstLevel extends Phaser.Scene {
   preload() {
     const loadingBar = this.add.graphics({
       fillStyle: {
-        color: 0xffffff
-      }
-    })
+        color: 0xffffff,
+      },
+    });
     this.load.on('progress', (percentage) => {
-      this.add.text(this.game.renderer.width/2 - 30, this.game.renderer.height/2 - 75, 'Loading', {
+      this.add.text(this.game.renderer.width / 2 - 30, this.game.renderer.height / 2 - 75, 'Loading', {
         fontFamily: 'New Tegomin',
         fontSize: '30px',
         fill: '#ffffff',
-      })
-      loadingBar.fillRect(this.game.renderer.width* 0.1, this.game.renderer.height / 2, (this.game.renderer.width * percentage) * 0.8, 30)
-    })
+      });
+      loadingBar.fillRect(this.game.renderer.width * 0.1, this.game.renderer.height / 2,
+        (this.game.renderer.width * percentage) * 0.8, 30);
+    });
     this.load.image('sky', CST[this.level].sky);
     if (this.level !== 'secondLevel') {
       this.load.image('cloud', CST[this.level].cloud);

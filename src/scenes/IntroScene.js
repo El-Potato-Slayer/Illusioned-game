@@ -19,15 +19,16 @@ export default class IntroScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000);
-    const vid = this.add.video(680, 350, 'intro');
+    const vid = this.add.video(this.game.renderer.width / 2, this.game.renderer.height / 2, 'intro');
     vid.play(true);
     vid.scale = 0.7;
 
-    this.text = this.add.text(460, 20, 'Press spacebar to skip', { 
-      fontFamily: 'New Tegomin', 
-      fontSize: '32px', 
-      fill: '#ffffff' 
+    this.text = this.add.text(0, 0, 'Press spacebar to skip', {
+      fontFamily: 'New Tegomin',
+      fontSize: '32px',
+      fill: '#ffffff',
     });
+    this.text.setPosition((this.game.renderer.width / 2) - (this.text.width / 2), 20);
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.input.keyboard.on('keydown-SPACE', () => this.startFirstLevel());
