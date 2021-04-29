@@ -1,5 +1,5 @@
 # Illusioned
-A browser game built with Phaser 3. It's quite chill. A dude has to stop the world from being destroyed, something along those lines. I haven't focused on the story.
+A browser game built with Phaser 3. It is responsive across different computer monitors, and features alluringly haunting music, paired with beautiful designs.
 
 ![image](https://user-images.githubusercontent.com/43865875/116489526-7d41f480-a895-11eb-95e1-37daa017d72d.png)
 
@@ -22,9 +22,8 @@ A browser game built with Phaser 3. It's quite chill. A dude has to stop the wor
 3. Run `git clone https://github.com/El-Potato-Slayer/js-game.git`.
 4. Run `cd js-game` or open the `js-game` folder using your file explorer.
 5. Run `npm install`
-6. Run `npm run build`
-7. Run `cd dist`
-8. Right click on `index.html`, and open the file with a local server.
+6. Run `npm run start:dev`
+7. Open `http://localhost:8080/` within your browser
 
 **To run the tests, follow these steps:**
 1. Ensure you are in the project root directory
@@ -51,7 +50,7 @@ A browser game built with Phaser 3. It's quite chill. A dude has to stop the wor
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/El-Potato-Slayer/js-game/issues).
 
 
 ## Show your support
