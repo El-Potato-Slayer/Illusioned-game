@@ -50,7 +50,7 @@ export default class LeaderBoard extends Phaser.Scene {
       this.scores = HelperFunctions.sortScores(temp);
       const timedScores = HelperFunctions.convertFetchedScoreToTime(this.scores);
 
-      for (let i = 0; i < this.scores.length; i += 1) {
+      for (let i = 0; i < 10; i += 1) {
         rankText.text += `${i + 1}.\n`;
         nameText.text += `${this.scores[i].user}\n`;
         scoreText.text += `${timedScores[i]}\n`;

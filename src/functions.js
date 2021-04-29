@@ -39,9 +39,6 @@ export default class HelperFunctions {
     for (let i = 0; i < scores.length; i += 1) {
       if (!Number.isNaN(Number(scores[i].score))) {
         arr.push(scores[i]);
-        if (arr.length >= 10) {
-          break;
-        }
       }
     }
     return arr.sort((a, b) => a.score - b.score);

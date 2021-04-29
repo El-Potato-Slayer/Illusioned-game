@@ -85,6 +85,8 @@ export default class FirstLevel extends Phaser.Scene {
       isStatic: true,
     });
 
+    this.createLevelText();
+
     this.background = this.add.tileSprite(0, 0, 2500, 1000, 'sky').setOrigin(0, 0);
     this.background.setScrollFactor(0);
     this.background.scaleX = 3;
@@ -283,6 +285,40 @@ export default class FirstLevel extends Phaser.Scene {
     this.createAnimation('stand', 'player', 'stand', 1, 1);
     this.createAnimation('jump', 'player', 'jump', 1, 1);
     this.createAnimation('fall', 'player', 'land', 1, 1);
+  }
+
+  createLevelText() {
+    const levelText = this.add.text(0, 0, '', {
+      fontFamily: 'New Tegomin',
+      fontSize: '70px',
+      fill: '#ffffff',
+    });
+    if (this.level === 'firstLevel') {
+      levelText.setText('Level One');
+      levelText.text = 'Level One';
+    } else if (this.level === 'secondLevel') {
+      levelText.setText('Level Two');
+    } else if (this.level === 'thirdLevel') {
+      levelText.setText('Finale');
+    }
+    levelText.setPosition((this.cameras.main.width / 2) - (levelText.width / 2),
+      this.cameras.main.height / 2 - 100).setDepth(1).setScrollFactor(0).setAlpha(0);
+    this.tweens.add({
+      targets: levelText,
+      alpha: 1,
+      duration: 2000,
+      completeDelay: 3000,
+      onComplete: () => {
+        this.tweens.add({
+          targets: levelText,
+          alpha: 0,
+          duration: 2000,
+          onComplete: () => {
+            levelText.active = false;
+          },
+        });
+      },
+    });
   }
 
   createBridge(shape) {

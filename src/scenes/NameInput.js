@@ -28,6 +28,7 @@ export default class NameInput extends Phaser.Scene {
     const btn = document.getElementById('submit');
     btn.onclick = () => {
       if (!this.enteredName) {
+        this.enteredName = true;
         const name = document.getElementById('name').value.substr(0, 10);
         postScore(name, this.score).then(() => {
           this.form.classList.add('hidden');
