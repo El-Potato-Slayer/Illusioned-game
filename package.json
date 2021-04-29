@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:dev": "webpack serve --mode development --env development",
     "test": "jest"
   },
   "repository": {
@@ -25,7 +26,8 @@
     "jest": "^26.6.3",
     "jest-canvas-mock": "^2.3.1",
     "webpack": "^5.30.0",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@babel/preset-env": "^7.13.15",
