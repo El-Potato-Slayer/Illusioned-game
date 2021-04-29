@@ -23,19 +23,19 @@ export default class MenuScene extends Phaser.Scene {
       volume: 0,
     });
     this.menuSong.play();
-    const musicFadeIn = this.tweens.add({
+    this.tweens.add({
       targets: this.menuSong,
       volume: 0.2,
       duration: 3000,
     });
 
-    const playBtn = this.createButton(this.renderer.width / 2, this.renderer.height / 2 - 30, 'play_btn', CST.scenes.intro)
-    playBtn.setScale(0.5)
-    const leaderBoardBtn = this.createButton(this.renderer.width/2, this.renderer.height / 2 + 100, 'leaderboard_btn', CST.scenes.leaderBoard)
-    leaderBoardBtn.setScale(0.5)
+    const playBtn = this.createButton(this.renderer.width / 2, this.renderer.height / 2 - 30, 'play_btn', CST.scenes.intro);
+    playBtn.setScale(0.5);
+    const leaderBoardBtn = this.createButton(this.renderer.width / 2, this.renderer.height / 2 + 100, 'leaderboard_btn', CST.scenes.leaderBoard);
+    leaderBoardBtn.setScale(0.5);
   }
 
-  createButton(x, y, btnKey, scene, musicTween){
+  createButton(x, y, btnKey, scene) {
     const btn = this.add.image(x, y, btnKey);
     btn.setInteractive();
     btn.on('pointerover', () => {
@@ -58,6 +58,6 @@ export default class MenuScene extends Phaser.Scene {
         this.scene.start(scene);
       });
     });
-    return btn
+    return btn;
   }
 }

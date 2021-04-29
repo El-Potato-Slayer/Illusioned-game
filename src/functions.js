@@ -17,7 +17,7 @@ export default class HelperFunctions {
 
   static convertFetchedScoreToTime(scores) {
     const arr = [];
-    scores.forEach(scorePair => {
+    scores.forEach((scorePair) => {
       const minutes = Math.floor(scorePair.score / 60);
       const seconds = scorePair.score % 60;
       if (minutes < 10 && seconds < 10) {

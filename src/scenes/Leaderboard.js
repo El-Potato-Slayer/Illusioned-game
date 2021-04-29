@@ -45,7 +45,7 @@ export default class LeaderBoard extends Phaser.Scene {
       fontSize: '30px',
       fill: '#ffffff',
     });
-    getScores().then(data => {
+    getScores().then((data) => {
       const temp = data.result;
       this.scores = HelperFunctions.sortScores(temp);
       const timedScores = HelperFunctions.convertFetchedScoreToTime(this.scores);

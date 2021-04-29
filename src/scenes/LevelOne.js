@@ -182,7 +182,7 @@ export default class FirstLevel extends Phaser.Scene {
     this.createKeyboardInputs();
 
     this.matter.world.on('collisionstart', (event) => {
-      event.pairs.forEach(pair => {
+      event.pairs.forEach((pair) => {
         const { bodyA, bodyB } = pair;
 
         if (bodyA.region && (bodyA.region.id === '0,156,21,22' || bodyB.label === 'crawler') && !this.player.body.isSensor) {

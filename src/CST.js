@@ -176,7 +176,7 @@ const CST = {
         y: 640,
         scale: 0.2,
         width: 40,
-      }
+      },
     ],
     water: [
       {
