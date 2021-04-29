@@ -201,7 +201,6 @@ export default class FirstLevel extends Phaser.Scene {
           this.restartText(failMusic);
         }
 
-
         if (bodyA.label !== 'leftBoundary') {
           if (bodyA.label === 'player' || bodyB.label === 'player') {
             this.isTouchingGround = true;
