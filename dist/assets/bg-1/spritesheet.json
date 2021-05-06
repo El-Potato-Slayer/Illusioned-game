@@ -1,0 +1,55 @@
+{
+	"frames": {
+		"ground.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 1360,
+				"h": 83
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1360,
+				"h": 83
+			},
+			"sourceSize": {
+				"w": 1360,
+				"h": 83
+			}
+		},
+		"house.png": {
+			"frame": {
+				"x": 1360,
+				"y": 0,
+				"w": 1115,
+				"h": 1042
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1115,
+				"h": 1042
+			},
+			"sourceSize": {
+				"w": 1115,
+				"h": 1042
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 2475,
+			"h": 1042
+		},
+		"scale": "1"
+	}
+}

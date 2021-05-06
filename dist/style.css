@@ -1,3 +1,25 @@
-*{
+*, 
+*::before,
+*::after{
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body{
+  height: 700px;
+  /* height: max-content; */
+}
+
+.black-overlay{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0, 0.5);
+}
+
+#form-wrapper{
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

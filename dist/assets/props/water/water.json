@@ -1,0 +1,1275 @@
+{
+	"frames": {
+		"waterAnimation1": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation10": {
+			"frame": {
+				"x": 1000,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation11": {
+			"frame": {
+				"x": 2000,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation12": {
+			"frame": {
+				"x": 3000,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation13": {
+			"frame": {
+				"x": 0,
+				"y": 260,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation14": {
+			"frame": {
+				"x": 1000,
+				"y": 260,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation15": {
+			"frame": {
+				"x": 2000,
+				"y": 260,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation16": {
+			"frame": {
+				"x": 3000,
+				"y": 260,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation17": {
+			"frame": {
+				"x": 0,
+				"y": 520,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation18": {
+			"frame": {
+				"x": 1000,
+				"y": 520,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation19": {
+			"frame": {
+				"x": 2000,
+				"y": 520,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation2": {
+			"frame": {
+				"x": 3000,
+				"y": 520,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation20": {
+			"frame": {
+				"x": 0,
+				"y": 780,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation21": {
+			"frame": {
+				"x": 1000,
+				"y": 780,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation22": {
+			"frame": {
+				"x": 2000,
+				"y": 780,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation23": {
+			"frame": {
+				"x": 3000,
+				"y": 780,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation24": {
+			"frame": {
+				"x": 0,
+				"y": 1040,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation25": {
+			"frame": {
+				"x": 1000,
+				"y": 1040,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation26": {
+			"frame": {
+				"x": 2000,
+				"y": 1040,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation27": {
+			"frame": {
+				"x": 3000,
+				"y": 1040,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation28": {
+			"frame": {
+				"x": 0,
+				"y": 1300,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation29": {
+			"frame": {
+				"x": 1000,
+				"y": 1300,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation3": {
+			"frame": {
+				"x": 2000,
+				"y": 1300,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation30": {
+			"frame": {
+				"x": 3000,
+				"y": 1300,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation31": {
+			"frame": {
+				"x": 0,
+				"y": 1560,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation32": {
+			"frame": {
+				"x": 1000,
+				"y": 1560,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation33": {
+			"frame": {
+				"x": 2000,
+				"y": 1560,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation34": {
+			"frame": {
+				"x": 3000,
+				"y": 1560,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation35": {
+			"frame": {
+				"x": 0,
+				"y": 1820,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation36": {
+			"frame": {
+				"x": 1000,
+				"y": 1820,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation37": {
+			"frame": {
+				"x": 2000,
+				"y": 1820,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation38": {
+			"frame": {
+				"x": 3000,
+				"y": 1820,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation39": {
+			"frame": {
+				"x": 0,
+				"y": 2080,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation4": {
+			"frame": {
+				"x": 1000,
+				"y": 2080,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation40": {
+			"frame": {
+				"x": 2000,
+				"y": 2080,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation41": {
+			"frame": {
+				"x": 3000,
+				"y": 2080,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation42": {
+			"frame": {
+				"x": 0,
+				"y": 2340,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation43": {
+			"frame": {
+				"x": 1000,
+				"y": 2340,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation44": {
+			"frame": {
+				"x": 2000,
+				"y": 2340,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation45": {
+			"frame": {
+				"x": 3000,
+				"y": 2340,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation46": {
+			"frame": {
+				"x": 0,
+				"y": 2600,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation47": {
+			"frame": {
+				"x": 1000,
+				"y": 2600,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation48": {
+			"frame": {
+				"x": 2000,
+				"y": 2600,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation49": {
+			"frame": {
+				"x": 3000,
+				"y": 2600,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation5": {
+			"frame": {
+				"x": 0,
+				"y": 2860,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation50": {
+			"frame": {
+				"x": 1000,
+				"y": 2860,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation51": {
+			"frame": {
+				"x": 2000,
+				"y": 2860,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation52": {
+			"frame": {
+				"x": 3000,
+				"y": 2860,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation53": {
+			"frame": {
+				"x": 0,
+				"y": 3120,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation54": {
+			"frame": {
+				"x": 1000,
+				"y": 3120,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation55": {
+			"frame": {
+				"x": 2000,
+				"y": 3120,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation56": {
+			"frame": {
+				"x": 3000,
+				"y": 3120,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation57": {
+			"frame": {
+				"x": 0,
+				"y": 3380,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation58": {
+			"frame": {
+				"x": 1000,
+				"y": 3380,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation59": {
+			"frame": {
+				"x": 2000,
+				"y": 3380,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation6": {
+			"frame": {
+				"x": 3000,
+				"y": 3380,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation60": {
+			"frame": {
+				"x": 0,
+				"y": 3640,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation61": {
+			"frame": {
+				"x": 1000,
+				"y": 3640,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation62": {
+			"frame": {
+				"x": 2000,
+				"y": 3640,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation63": {
+			"frame": {
+				"x": 3000,
+				"y": 3640,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation7": {
+			"frame": {
+				"x": 4000,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation8": {
+			"frame": {
+				"x": 4000,
+				"y": 260,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		},
+		"waterAnimation9": {
+			"frame": {
+				"x": 4000,
+				"y": 520,
+				"w": 1000,
+				"h": 260
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 260
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 260
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet",
+		"format": "RGBA8888",
+		"size": {
+			"w": 5000,
+			"h": 3900
+		},
+		"scale": "1"
+	}
+}
