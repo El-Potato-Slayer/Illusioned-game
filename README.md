@@ -1,5 +1,6 @@
 # Illusioned
 A browser game built with Phaser 3. The game consists of 3 levels with varying difficulties. It is responsive across different computer monitors, and features alluringly haunting music, paired with beautiful designs.
+The game makes use of the MatterJs physics engine, and includes custom polygon collisions for objects. The game includes a cutscene, 3 different levels, a leaderboard, and a creditscene.
 
 ![image](https://user-images.githubusercontent.com/43865875/116489526-7d41f480-a895-11eb-95e1-37daa017d72d.png)
 
