@@ -4,7 +4,7 @@ The game makes use of the MatterJs physics engine, and includes custom polygon c
 
 ![image](https://user-images.githubusercontent.com/43865875/116489526-7d41f480-a895-11eb-95e1-37daa017d72d.png)
 
-[Live Demo](https://el-potato-slayer.github.io/js-game/dist/index.html)
+[Live Demo](https://el-potato-slayer.github.io/Illusioned-game/dist/)
 
 ## Controls
 - To move left: Press the A key or the left arrow key
